@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 
         var objs = [];
         var left = parseInt(val);
+
         for (var i = 1;  i < left+1; i++) {
             client.hmget('group:'+i, 'logo', 'description', 'url', 'members', 'name', postGet);
         }
@@ -35,11 +36,13 @@ router.get('/', function(req, res, next) {
                 groups: objs,
             });
         }
+
     });
 });
 
 router.post('/update/:id', function(req, res, next) {
     var index = req.params.id;
+
     client.hmset('group:'+index, {
         name: req.body.name,
         logo: req.body.logo,
@@ -47,7 +50,7 @@ router.post('/update/:id', function(req, res, next) {
         url: req.body.url,
         members: req.body.members,
     });
-    res.send('OK');
+    res.redirect('/manage');
 });
 
 module.exports = router;

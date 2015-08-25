@@ -1,23 +1,26 @@
 extends layout
 
 block content
-  h1= title
-  table.table
-      tr
-          th #
-          th Naam
-          th Beschrijving
-          th Logo
-          th URL
-          th Personen
-          th Actions
-        each group, index in groups
-            tr
-                td(contentEditable)= (index+1)
-                td(contentEditable)= group.name
-                td(contentEditable)= group.description
-                td(contentEditable)= group.logo
-                td(contentEditable)= group.url
-                td(contentEditable)= group.members
-                td
-                    button.btn.btn-primary APPLY
+    h1= title
+    table.table
+        tr
+            th #
+            th Naam
+            th Beschrijving
+            th Logo
+            th URL
+            th Personen
+            th Actions
+                each group, index in groups
+                    tr
+                        td(contentEditable)= (index+1)
+                        td(contentEditable)= group.name
+                        td(contentEditable)= group.description
+                        td(contentEditable)= group.logo
+                        td(contentEditable)= group.url
+                        td(contentEditable)= group.members
+                        td
+                            button.btn.btn-primary.btn-apply APPLY
+
+    script(src="/scripts/main.js")
+
