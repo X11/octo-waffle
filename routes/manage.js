@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
         var objs = [];
         var left = parseInt(val);
         for (var i = 1;  i < left+1; i++) {
-            client.hmget('group:'+i, 'logo', 'description', 'url', 'members', postGet);
+            client.hmget('group:'+i, 'logo', 'description', 'url', 'members', 'name', postGet);
         }
 
         function postGet(err, obj){
@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
                 description: obj[1],
                 url: obj[2],
                 members: obj[3],
+                name: obj[4],
             });         
             left--;
             check();
@@ -29,15 +30,24 @@ router.get('/', function(req, res, next) {
 
         function check() {
             if (left > 0) return;
-            objs.forEach(function(obj, index, array) {
-                obj.name = "Groep " + (index+1);
-            });
             res.render('manage', {
-                title: "Groepen",
+                title: "Beheer",
                 groups: objs,
             });
         }
     });
+});
+
+router.post('/update/:id', function(req, res, next) {
+    var index = req.params.id;
+    client.hmset('group:'+index, {
+        name: req.body.name,
+        logo: req.body.logo,
+        description: req.body.description,
+        url: req.body.url,
+        members: req.body.members,
+    });
+    res.send('OK');
 });
 
 module.exports = router;
