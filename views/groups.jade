@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  ul.media-list
+    each group in groups
+        li.media
+            .media-left
+                img(src=group.logo)
+            .media-body
+                h4.media-heading= group.name
+                p= group.description
+                ul
+                    each member in group.members
+                        li= member
