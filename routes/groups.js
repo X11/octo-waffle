@@ -13,17 +13,21 @@ router.get('/', function(req, res, next) {
         var objs = [];
         var left = parseInt(val);
         for (var i = 1;  i < left+1; i++) {
-            client.hmget('group:'+i, 'logo', 'description', 'url', 'members', function(err, obj) {
-                objs.push({
-                    logo: obj[0],
-                    description: obj[1],
-                    url: obj[2],
-                    members: obj[3].split(","),
-                });         
-                left--;
-                check();
-            });
+            client.hmget('group:'+i, 'logo', 'description', 'url', 'members', 'name', postGet);
         }
+
+        function postGet(err, obj){
+            objs.push({
+                logo: obj[0],
+                description: obj[1],
+                url: obj[2],
+                members: obj[3].split(","),
+                name: obj[4],
+            });         
+            left--;
+            check();
+        }
+
         function check() {
             if (left > 0) return;
             objs.forEach(function(obj, index, array) {
