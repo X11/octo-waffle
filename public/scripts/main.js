@@ -30,6 +30,7 @@ for (var node = 0, len = buttons.length; node < len; node++)
             document.body.appendChild(form);
             form.submit();
         }
+        
         var data = [].slice.call(e.target.parentNode.parentNode.childNodes);
         var user = {
             description: data[2].innerHTML,

@@ -43,6 +43,10 @@ router.get('/', function(req, res, next) {
 router.post('/update/:id', function(req, res, next) {
     var index = req.params.id;
 
+    // Replace some magic <br>.
+    for (var attr in req.body) 
+        req.body[attr] = req.body[attr].replace('<br>', '')
+
     client.hmset('group:'+index, {
         name: req.body.name,
         logo: req.body.logo,
