@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/dist/css/main.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+        block css
+
+    body
+        header.small
+            div.container
+                div.row
+                    a(href="/")
+                        img(src='/images/logo.png').logo
+
+        .space-fix
+        div#content.container
+            div.row
+                block content
+        include ./../partial/footer
+        block script

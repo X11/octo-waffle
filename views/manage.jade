@@ -1,7 +1,25 @@
-extends layout
+extends layout/base
 
 block content
+    if error != ""
+        div.alert.alert-danger
+            p #{error}
+    if success != ""
+        div.alert.alert-success
+            p #{success}
+
     h1= title
+        div.btn-group.pull-right
+            a(href="/companies").btn.btn-success Bedrijven
+            a(href="/password/remove").btn.btn-danger Uitloggen
+
+    p Klik op de content om het aan te passen
+     ul
+         li Naam van de groep
+         li Pitch
+         li Direct link naar het logo
+         li URL naar de website
+         li Personen gescheiden door een komma
     table.table
         tr
             th #
@@ -11,9 +29,9 @@ block content
             th URL
             th Personen
             th Actions
-                each group, index in groups
+                each group in groups
                     tr
-                        td(contentEditable)= (index+1)
+                        td= group.id
                         td(contentEditable)= group.name
                         td(contentEditable)= group.description
                         td(contentEditable)= group.logo
@@ -21,6 +39,8 @@ block content
                         td(contentEditable)= group.members
                         td
                             button.btn.btn-primary.btn-apply Apply
+    p.pull-right
 
-    script(src="/scripts/main.js")
 
+block script
+    script(src="/dist/js/groups.js")

@@ -1,0 +1,25 @@
+
+body > header {
+    padding: 20px 0;
+    display: block;
+    background: #E6E6E6;
+    text-align:center;
+
+    .logo {
+        height: 100px;
+    }
+
+    &.small {
+        text-align:right;
+
+        .logo {
+            height: 60px;
+        }
+    }
+}
+
+.heading {
+    background: url('/images/bigbg.png');
+    background-size: 100%;
+    padding: 200px 0;
+}

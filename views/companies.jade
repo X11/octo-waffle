@@ -1,14 +1,17 @@
-extends layout
+extends layout/base
 
 block content
-    .container
-      h1= title
-      ul.media-list
+    h1= title
+    ul.media-list.col-md-12.groups
         each group in groups
             li.media
+                hr
                 .media-left
-                    img(src=group.logo)
+                    a.hidden-xs
+                        img(src=group.logo)
                 .media-body
+                    p.text-center
+                        img(src=group.logo, style="margin:auto;").visible-xs
                     h4.media-heading= group.name
                     p= group.description
                     ul
