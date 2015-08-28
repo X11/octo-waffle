@@ -2,6 +2,6 @@ extends layout/base
 
 block content
   h1= message
-  if (error.status)
+  if (error.status:
       h2= error.status
       pre #{error.stack}
