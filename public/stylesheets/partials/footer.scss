@@ -3,16 +3,20 @@ footer {
     position: absolute;
     width: 100%;
     bottom: 0;
-    padding-top: 80px;
-    padding-bottom: 20px;
     color: #aaa;
-    background: #3d4351;
+    background: #1f1f1f;
+    border-top: #3a3a3a;
+    padding-top: 15px;
+    height: 60px;
+    p {
+        font-size: 80%;
+    }
 
     a {
         color: #fff;
 
         &:hover {
-            color: #d00;
+            color: #f44;
         }
     }
 }

@@ -1,5 +1,40 @@
 
+section {
+    padding: 40px 0;
+    margin-bottom: 30px;
+}
+
 .cloud {
     padding: 40px 0;
-    background: #eee ;
+    background: #eee;
+    box-shadow:
+        inset 0px 11px 8px -10px #CCC,
+        inset 0px -11px 8px -10px #CCC;
+}
+
+.panel-custom {
+    background: transparent;
+    border-radius: none;
+    border-left: 1px solid #b00;
+
+    .panel-heading {
+        padding: 0;
+        display: table;
+        background: #b00;
+        color: #fff;
+        padding: 10px 20px;
+
+        h3 {
+            display: table;
+            margin: 0;
+        }
+    }
+
+    & > img {
+        width: 100%;
+    }
+
+    .panel-body {
+        background: #fff;
+    }
 }

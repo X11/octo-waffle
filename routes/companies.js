@@ -13,6 +13,9 @@ router.get('/', function(req, res, next) {
         .smembers('GROUPS')
         .then(function(vals) {
             left = vals.length;
+
+            if (left === 0) check("Geen bedrijven om weer te geven");
+
             vals.forEach(function(i) {
                 console.log(i);
                 redis
@@ -37,10 +40,11 @@ router.get('/', function(req, res, next) {
         check();
     }
 
-    function check() {
+    function check(err) {
         if (left > 0) return;
         res.render('companies', {
             title: "Bedrijven",
+            error: err,
             groups: objs,
         });
     }

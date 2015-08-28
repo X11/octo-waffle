@@ -2,16 +2,20 @@ doctype html
 html
     head
         title= title
-        link(rel='stylesheet', href='/dist/css/main.css')
+
+        include ./../partial/meta
+
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/dist/css/main.css')
         block css
 
     body
-        header.base
-            div.container
-                div.row
-                    a(href="/")
-                        img(src='/images/logo.png').logo
+        include ./../partial/mixin/header
+        +header()
+
         block content
+
         include ./../partial/footer
+
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
         block script

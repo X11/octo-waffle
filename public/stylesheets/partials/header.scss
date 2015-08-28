@@ -1,9 +1,9 @@
 
 body > header {
-    padding: 20px 0;
     display: block;
-    background: #E6E6E6;
     text-align:center;
+    padding: 20px;
+    background: #ededed;
 
     .logo {
         height: 100px;
@@ -11,6 +11,7 @@ body > header {
 
     &.small {
         text-align:right;
+        margin-bottom: 30px;
 
         .logo {
             height: 60px;
@@ -21,5 +22,13 @@ body > header {
 .heading {
     background: url('/images/bigbg.png');
     background-size: 100%;
-    padding: 200px 0;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+
+    h1, p {
+        color: #fff !important;
+        display: table;
+        padding: 10px 20px;
+        background: rgba(200,0,0,0.5);
+    }
 }

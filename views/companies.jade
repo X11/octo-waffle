@@ -2,6 +2,8 @@ extends layout/base
 
 block content
     h1= title
+    if (error)
+        div.alert.alert-danger #{error}
     ul.media-list.col-md-12.groups
         each group in groups
             li.media
