@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
+var RedisStore = require('connect-redis')(session);
+var redisClient = require('ioredis')();
 
 var app = express();
 
@@ -29,6 +31,9 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 
 app.use(session({
+    store: new RedisStore({
+        client: redisClient
+    }),
     secret: 'Ugh moet dit seriously',
     resave: false,
     saveUninitialized: true,
@@ -36,6 +41,14 @@ app.use(session({
         maxAge: 60000
     }
 }));
+
+app.use(function(req, res, next) {
+    if (req.session) {
+        return next();
+    }
+    res.send('Error connecting to the store. Please retry.');
+    console.log(1);
+});
 
 
 // serve

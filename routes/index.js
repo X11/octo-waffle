@@ -7,6 +7,7 @@ var password = require('./password.js');
 var companies = require('./companies.js');
 
 module.exports = function(app) {
+
     app.use('/', main);
     app.use('/manage', manage);
     app.use('/password', password);
