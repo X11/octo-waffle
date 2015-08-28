@@ -6,12 +6,11 @@ block content
         each group in groups
             li.media
                 hr
+                img(src=group.logo, style="margin:auto;").visible-xs.center-block.img-responsive
                 .media-left
                     a.hidden-xs
-                        img(src=group.logo)
+                        img(src=group.logo).center-block
                 .media-body
-                    p.text-center
-                        img(src=group.logo, style="margin:auto;").visible-xs
                     h4.media-heading= group.name
                     p= group.description
                     ul
