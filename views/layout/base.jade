@@ -2,7 +2,9 @@ doctype html
 html
     head
         title= title
+
         include ./../partial/meta
+
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
         link(rel='stylesheet', href='/dist/css/main.css')
         block css
@@ -17,5 +19,6 @@ html
             div.row
                 block content
         include ./../partial/footer
+        script(src="https://code.jquery.com/jquery-1.11.3.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
         block script

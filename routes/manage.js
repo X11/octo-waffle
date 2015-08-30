@@ -4,7 +4,6 @@ var redis = require('ioredis')();
 var router = express.Router();
 
 router.use(function(req, res, next) {
-    console.log(req.session);
 	if (req.session.accessLevel)
 		return next();
 	req.flash('message', "Geen toegang");

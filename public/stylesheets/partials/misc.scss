@@ -2,3 +2,11 @@
 .space-fix {
     padding-top: 40px;
 }
+
+.valign {
+    & > div {
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+    }
+}
