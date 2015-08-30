@@ -25,6 +25,11 @@ body > header {
     padding-top: 60px !important;
     padding-bottom: 60px !important;
 
+
+    @media (max-width: 400px){
+        background-size: auto 100%;
+        background-position: top center;
+    }
     h1, p {
         color: #fff !important;
         display: table;
