@@ -8,8 +8,11 @@ html
         block css
 
     include ./../partial/mixin/header
+    include ./../partial/mixin/heading
     body
         +header()(class="small")
+        if (heading)
+            +heading(heading.title, heading.tagline, heading.bg)
         div.container
             div.row
                 block content

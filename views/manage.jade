@@ -8,7 +8,7 @@ block content
         div.alert.alert-success
             p #{success}
 
-    h1= title
+    h2 Bedrijven
         div.btn-group.pull-right
             a(href="/companies").btn.btn-success Bedrijven
             a(href="/password/remove").btn.btn-danger Uitloggen
@@ -21,24 +21,26 @@ block content
          li URL naar de website
          li Personen gescheiden door een komma
     table.table
-        tr
-            th #
-            th Naam
-            th Beschrijving
-            th Logo
-            th URL
-            th Personen
-            th Actions
-                each group in groups
-                    tr
-                        td= group.id
-                        td(contentEditable)= group.name
-                        td(contentEditable)= group.description
-                        td(contentEditable)= group.logo
-                        td(contentEditable)= group.url
-                        td(contentEditable)= group.members
-                        td
-                            button.btn.btn-primary.btn-apply Apply
+        thead
+            tr
+                th #
+                th Naam
+                th Beschrijving
+                th Logo
+                th URL
+                th Personen
+                th Actions
+        tbody
+            each group in groups
+                tr
+                    td= group.id
+                    td(contentEditable)= group.name
+                    td(contentEditable)= group.description
+                    td(contentEditable)= group.logo
+                    td(contentEditable)= group.url
+                    td(contentEditable)= group.members
+                    td
+                        button.btn.btn-primary.btn-apply Apply
     p.pull-right
 
 

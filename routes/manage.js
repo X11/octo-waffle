@@ -4,6 +4,7 @@ var redis = require('ioredis')();
 var router = express.Router();
 
 router.use(function(req, res, next) {
+    console.log(req.session);
 	if (req.session.accessLevel)
 		return next();
 	req.flash('message', "Geen toegang");
@@ -25,9 +26,13 @@ router.get('/', function(req, res, next) {
             })
             .catch(function(err) {
                 res.render('manage', {
-                    title: "Beheer",
+                    title: "Bedrijven | Beheren",
                     error: 'An error accured',
                     groups: [],
+                    heading: {
+                        title: "Beheren",
+                        bg: 'city'
+                    },
                 });
             });
     } else {
@@ -48,10 +53,14 @@ router.get('/', function(req, res, next) {
             })
             .catch(function(err) {
                 res.render('manage', {
-                    title: "Beheer",
+                    title: "Bedrijven | Beheren",
                     success: false,
                     error: err.message,
                     groups: [],
+                    heading: {
+                        title: "Beheren",
+                        bg: 'city'
+                    },
                 });
             });
     }
@@ -82,10 +91,14 @@ router.get('/', function(req, res, next) {
     function check() {
         if (left > 0) return;
         res.render('manage', {
-            title: "Beheer",
+            title: "Bedrijven | Beheren",
             success: req.flash("success"),
             error: req.flash("error"),
             groups: objs,
+            heading: {
+                title: "Beheren",
+                bg: 'city'
+            },
         });
     }
 });

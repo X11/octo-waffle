@@ -11,7 +11,6 @@ body > header {
 
     &.small {
         text-align:right;
-        margin-bottom: 30px;
 
         .logo {
             height: 60px;
@@ -21,7 +20,8 @@ body > header {
 
 .heading {
     background: url('/images/bigbg.png');
-    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
     padding-top: 60px !important;
     padding-bottom: 60px !important;
 
@@ -29,6 +29,14 @@ body > header {
         color: #fff !important;
         display: table;
         padding: 10px 20px;
-        background: rgba(200,0,0,0.5);
+        background: rgba(200,0,0,0.8);
+    }
+
+    p {
+        font-size: 100%;
+    }
+
+    &.city {
+        background-image: url('/images/dubaibg.jpg');
     }
 }

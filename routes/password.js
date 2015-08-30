@@ -6,7 +6,10 @@ var passwords = require('./../config/access.json');
 router.get('/', function(req, res, next) {
 	res.render('password', {
         title: "VuurVechters | Geen probleem.",
-		message: req.flash('message')
+		message: req.flash('message'),
+        heading: {
+            title: 'Wachtwoord',
+        }
 	});
 });
 

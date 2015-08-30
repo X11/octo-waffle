@@ -15,17 +15,13 @@ section {
 .panel-custom {
     background: transparent;
     border-radius: none;
-    border-left: 1px solid #b00;
+    box-shadow: none;
 
     .panel-heading {
-        padding: 0;
-        display: table;
-        background: #b00;
-        color: #fff;
-        padding: 10px 20px;
+        border-radius: none;
+        padding: 10px 10px;
 
         h3 {
-            display: table;
             margin: 0;
         }
     }
@@ -36,5 +32,7 @@ section {
 
     .panel-body {
         background: #fff;
+        border-left: 1px solid #b00;
+        box-shadow: inset 0px 0px 5px #ccc;
     }
 }

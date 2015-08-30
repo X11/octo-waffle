@@ -17,7 +17,6 @@ router.get('/', function(req, res, next) {
             if (left === 0) check("Geen bedrijven om weer te geven");
 
             vals.forEach(function(i) {
-                console.log(i);
                 redis
                     .hmget('group:' + i, 'logo', 'description', 'url', 'members', 'name')
                     .then(function(data) {
@@ -44,6 +43,11 @@ router.get('/', function(req, res, next) {
         if (left > 0) return;
         res.render('companies', {
             title: "Bedrijven",
+            heading: {
+                title: "Bedrijven",
+                tagline: "Media college 2015",
+                bg: 'city'
+            },
             error: err,
             groups: objs,
         });
