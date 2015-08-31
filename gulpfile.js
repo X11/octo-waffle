@@ -8,12 +8,24 @@ var stylish = require('jshint-stylish');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var nodemon = require('gulp-nodemon');
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
 var del = require('del');
 
 notify.logLevel(0);
 
 gulp.task('clean', function(cb) {
     del(['./public/dist/**/*'], cb);
+});
+
+gulp.task('images', function () {
+    return gulp.src('./public/images/*')
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
+        .pipe(gulp.dest('./public/dist/images'));
 });
 
 gulp.task('scripts', function() {
@@ -76,7 +88,7 @@ gulp.task('lint', function() {
     //todo
 });
 
-gulp.task('client', ['scripts', 'sass']);
+gulp.task('client', ['images', 'scripts', 'sass']);
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', [
