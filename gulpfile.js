@@ -18,11 +18,13 @@ gulp.task('clean', function(cb) {
     del(['./public/dist/**/*'], cb);
 });
 
-gulp.task('images', function () {
+gulp.task('images', function() {
     return gulp.src('./public/images/*')
         .pipe(imagemin({
             progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
+            svgoPlugins: [{
+                removeViewBox: false
+            }],
             use: [pngquant()]
         }))
         .pipe(gulp.dest('./public/dist/images'));
