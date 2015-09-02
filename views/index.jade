@@ -1,36 +1,58 @@
-extends layout/home
+extends ./layout/main
+
+include ./partial/mixin/heading
 
 block content
-    div.container-fluid
-        section.row
-            div.heading
-    div.space-fix
-    div.container
-        section.row
-            div.col-md-8
-                h3 Hello world
-                p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            div.col-md-4
-                h3 Hello world
-                p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    div.space-fix
-    div.cloud
+    +heading(heading.title, heading.tagline)
+    section.container
+        div.row.valign.text-center
+            div.col-sm-6.text-left
+                div.panel.panel-custom
+                    div.panel-heading
+                        h3 <i class="fa fa-question-circle"></i> Advies
+                    div.panel-body
+                        p
+                            b Heeft u een probleem? Weet u niet hoe u het moet aanpakken? Of gewoon voor extra zekerheid? De Vuurvechters zullen u advies en bieden!
+                        p Wij luisteren met aandacht naar uw problemen. Wanneer u vast komt te zitten tijdens een project en u bent niet zeker van wat uw mogelijkheden zijn of u weet niet wat de beste keus is; dan bieden wij u een uitgebreid antwoord op uw vraag.
+            div.col-sm-6.hidden-xs
+                img(src="/dist/images/advies.png").img-responsive.center-block
+        div.view-fix
+        div.row.valign.text-center
+            div.col-sm-6.hidden-xs
+                img(src="/dist/images/support2.png").img-responsive.center-block
+            div.col-sm-6.text-left
+                div.panel.panel-custom
+                    div.panel-heading
+                        h3 <i class="fa fa-shield"></i> Ondersteuning
+                    div.panel-body
+                        p
+                            b Komt u er niet uit? Geen idee hoe je moet beginnen? Of gaat u dit gewoon niet alleen lukken? Vuurvechters redt u uit uw problemen!
+                        p Of het nou ligt aan het ontwikkelen van complexe functionaliteiten, het neerzetten van een ontwikkelings omgeving of een klein brandje dat geblust moet worden. Wij doven het vuur.
+    section.cloud
         div.container
-            section.row
-                div.col-md-6
-                    img(src="/images/tickets.png").img-responsive
-                div.col-md-6
-                    h3 Hello world
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    p
-                        a(href="#").btn.btn-primary.pull-right Bezoek
-    div.space-fix
-    div.container
-        section.row
-            div.col-md-6
-                h3 Hello world
-                p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            div.col-md-6
-                h3 Hello world
-                p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    div.space-fix
+            div.row.valign.text-center
+                hr.visible-sm
+                div.col-md-6.text-left
+                    div.panel.panel-custom
+                        div.panel-heading
+                            h3 <i class="fa fa-wrench"></i> Werkwijzen
+                        img(src="/dist/images/tickets.png").visible-xs
+                        div.panel-body
+                            p
+                                b Voor alle hulp die wij bieden kunnen onze klanten gebruik maken van ons ticketing systeem.
+                            p Met dit systeem kan de klant aangeven wat het probleem is en waar de prioriteit ligt. Hiermee kunnen wij overzichtelijk en op professioneel onze klanten behandelen en hun problemen zo snel mogelijk verhelpen.
+                            a(disabled).btn.btn-danger.pull-right Coming soon..
+                div.col-md-6.hidden-xs
+                    img(src="/dist/images/tickets.png").img-responsive.center-block
+    section.container
+        div.row.valign.text-center
+            div.col-sm-4
+                img(src="/dist/images/logo.png").img-responsive.center-block
+            div.col-sm-8.text-left
+                div.panel.panel-custom
+                    div.panel-heading
+                        h3 <i class="fa fa-users"></i> Over VuurVechters
+                    div.panel-body
+                        p
+                            b De Vuurvechters is een startend bedrijf die een focus legt op het blussen van brandjes die bij bedrijven voorkomen.
+                        p Met maar 4 werknemers hebben wijn een brede kijk en kennis op het oplossen van complexe problemen voor zowel de front- als back-end van media applicaties.

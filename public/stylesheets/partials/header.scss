@@ -1,9 +1,9 @@
 
 body > header {
-    padding: 20px 0;
     display: block;
-    background: #E6E6E6;
     text-align:center;
+    padding: 20px;
+    background: #ededed;
 
     .logo {
         height: 100px;
@@ -19,7 +19,29 @@ body > header {
 }
 
 .heading {
-    background: url('/images/bigbg.png');
-    background-size: 100%;
-    padding: 200px 0;
+    background: url('/dist/images/bigbg.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+
+
+    @media (max-width: 400px){
+        background-size: auto 100%;
+        background-position: top center;
+    }
+    h1, p {
+        color: #fff !important;
+        display: table;
+        padding: 10px 20px;
+        background: rgba(204,0,0,0.8);
+    }
+
+    p {
+        font-size: 100%;
+    }
+
+    &.city {
+        background-image: url('/dist/images/dubaibg.jpg');
+    }
 }

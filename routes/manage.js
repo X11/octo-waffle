@@ -25,9 +25,13 @@ router.get('/', function(req, res, next) {
             })
             .catch(function(err) {
                 res.render('manage', {
-                    title: "Beheer",
+                    title: "Bedrijven | Beheren",
                     error: 'An error accured',
                     groups: [],
+                    heading: {
+                        title: "Beheren",
+                        bg: 'city'
+                    },
                 });
             });
     } else {
@@ -48,10 +52,14 @@ router.get('/', function(req, res, next) {
             })
             .catch(function(err) {
                 res.render('manage', {
-                    title: "Beheer",
+                    title: "Bedrijven | Beheren",
                     success: false,
                     error: err.message,
                     groups: [],
+                    heading: {
+                        title: "Beheren",
+                        bg: 'city'
+                    },
                 });
             });
     }
@@ -82,10 +90,14 @@ router.get('/', function(req, res, next) {
     function check() {
         if (left > 0) return;
         res.render('manage', {
-            title: "Beheer",
+            title: "Bedrijven | Beheren",
             success: req.flash("success"),
             error: req.flash("error"),
             groups: objs,
+            heading: {
+                title: "Beheren",
+                bg: 'city'
+            },
         });
     }
 });

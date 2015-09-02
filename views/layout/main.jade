@@ -5,20 +5,19 @@ html
 
         include ./../partial/meta
 
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css")
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
         link(rel='stylesheet', href='/dist/css/main.css')
         block css
 
-    include ./../partial/mixin/header
-    include ./../partial/mixin/heading
     body
-        +header()(class="small")
-        if (heading)
-            +heading(heading.title, heading.tagline, heading.bg)
-        div.container
-            div.row
-                block content
+        include ./../partial/mixin/header
+        +header()
+
+        block content
+
         include ./../partial/footer
+
         script(src="https://code.jquery.com/jquery-1.11.3.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
         block script

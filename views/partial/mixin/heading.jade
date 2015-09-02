@@ -1,0 +1,9 @@
+mixin heading(title, tagline, bg)
+    div(class=bg).jumbotron.heading
+        div.container
+            div.row
+                div.col-md-8
+                    if (title)
+                        h1= title
+                    if (heading.tagline)
+                        p= tagline
