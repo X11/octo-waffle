@@ -41,7 +41,7 @@ router.get('/', function(req, res, next) {
 
     function check(err) {
         if (left > 0) return;
-        res.render('companies', {
+        res.render('base/companies', {
             title: "Bedrijven",
             heading: {
                 title: "Bedrijven",

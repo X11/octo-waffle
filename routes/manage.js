@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
                 postGet(data, req.session.accessLevel);
             })
             .catch(function(err) {
-                res.render('manage', {
+                res.render('base/manage', {
                     title: "Bedrijven | Beheren",
                     error: 'An error accured',
                     groups: [],
@@ -51,7 +51,7 @@ router.get('/', function(req, res, next) {
 
             })
             .catch(function(err) {
-                res.render('manage', {
+                res.render('base/manage', {
                     title: "Bedrijven | Beheren",
                     success: false,
                     error: err.message,
@@ -89,7 +89,7 @@ router.get('/', function(req, res, next) {
 
     function check() {
         if (left > 0) return;
-        res.render('manage', {
+        res.render('base/manage', {
             title: "Bedrijven | Beheren",
             success: req.flash("success"),
             error: req.flash("error"),
