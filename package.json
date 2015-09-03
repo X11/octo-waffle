@@ -17,6 +17,7 @@
     "express-session": "^1.11.3",
     "ioredis": "^1.7.5",
     "jade": "~1.11.0",
+    "method-override": "^2.3.5",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
   },

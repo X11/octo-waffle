@@ -1,0 +1,6 @@
+mixin options(opts, selected)
+    for opt in opts
+        if (selected == opt)
+            option(selected, value=opt)= opt
+        else
+            option(value=opt)= opt

@@ -1,0 +1,27 @@
+extends ../layout/octo
+
+block content
+    if (error)
+        div.alert.alert-danger #{error}
+    div.panel.panel-custom
+        form(method="POST",action="/tickets/"+ticket.id).form-horizontal
+            input(type="hidden", name="_method", value="PUT")
+            div.row
+                div.col-sm-12
+                    div.col-md-12
+                        div.form-group
+                            label(for="id").col-sm-2.col-md-3.control-label #
+                            div.col-sm-10.col-md-9
+                                input(value=ticket.id, name='id', readonly)#id.form-control
+                        div.form-group
+                            label(for="name").col-sm-2.col-md-3.control-label Client
+                            div.col-sm-10.col-md-9
+                                input(value=ticket.name, name='name', readonly)#name.form-control
+                        div.form-group
+                            label(for="email").col-sm-2.col-md-3.control-label Email
+                            div.col-sm-10.col-md-9
+                                input(value=ticket.email, name='email', readonly)#email.form-control
+                        div.form-group.pull-right
+                            div.col-xs-12
+                                button.btn.btn-primary Update
+

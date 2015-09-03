@@ -1,0 +1,6 @@
+mixin octonav(links)
+    ul.nav.nav-tabs
+        for link in links
+            li(class=link.active)
+                a(href=link.href)= link.name
+        li.pull-right: a(href="/auth/logout") Uitloggen

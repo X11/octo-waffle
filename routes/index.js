@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var main = require('./main.js');
+var octo = require('./octo.js');
 var manage = require('./manage.js');
 var password = require('./password.js');
 var companies = require('./companies.js');
@@ -9,6 +10,7 @@ var companies = require('./companies.js');
 module.exports = function(app) {
 
     app.use('/', main);
+    app.use('/octo', octo);
     app.use('/manage', manage);
     app.use('/password', password);
     app.use('/companies', companies);

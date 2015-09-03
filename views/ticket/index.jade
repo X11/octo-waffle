@@ -1,0 +1,26 @@
+extends ../layout/octo
+
+block content
+    if (error)
+        div.alert.alert-danger #{error}
+    div.panel.panel-custom
+        table.table
+            thead
+                tr
+                    th #
+                    th Created_at
+                    th Client
+                    th Title
+                    th Assigned to
+                    th Priority
+                    th Status
+            tbody
+                each ticket in tickets
+                    tr
+                        td= ticket.id
+                        td= ticket.created_at
+                        td= ticket.client
+                        td: a(href="/octo/tickets/"+ticket.id) #{ticket.title}
+                        td= ticket.assigned
+                        td: span(class="label label-"+options.priority[ticket.priority])= ticket.priority
+                        td: span(class="label label-"+options.status[ticket.status])= ticket.status

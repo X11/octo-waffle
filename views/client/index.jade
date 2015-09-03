@@ -1,0 +1,18 @@
+extends ../layout/octo
+
+block content
+    if (error)
+        div.alert.alert-danger #{error}
+    div.panel.panel-custom
+        table.table
+            thead
+                tr
+                    th #
+                    th Client
+                    th Email
+            tbody
+                each client in clients
+                    tr
+                        td= client.id
+                        td= client.name
+                        td= client.email
