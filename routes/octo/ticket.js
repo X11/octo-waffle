@@ -50,6 +50,18 @@ router.get('/', function(req, res, next) {
     res.render('ticket/index');
 });
 
+router.get('/create', function(req, res, next) {
+    res.locals.current = {
+        client: {name: "Lorem Ipsum Client"}
+    };
+    res.render('ticket/create');
+});
+
+router.post('/create', function(req, res, next) {
+    console.log(req.body);
+    res.redirect('/octo/tickets/');
+});
+
 router.get('/:id', function(req, res, next) {
     res.locals.ticket = {
         id: req.params.id,

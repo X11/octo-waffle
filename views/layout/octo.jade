@@ -5,6 +5,7 @@ html
 
         include ./../partial/meta
 
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css")
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
         link(rel='stylesheet', href='/dist/css/main.css')
         block css
@@ -20,6 +21,9 @@ html
             div.row
                 +octonav(links, active)
             div.view-fix
+                if (error)
+                    div.row
+                        div.alert.alert-danger #{error}
             div.row
                 block content
         include ./../partial/footer

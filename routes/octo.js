@@ -37,7 +37,6 @@ router.use(function(req, res, next) {
         if (req.originalUrl.match('^'+link.href))
             link.active = true;
     });
-    console.log(res.locals.links);
     next();
 });
 

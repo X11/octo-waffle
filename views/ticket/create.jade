@@ -1,0 +1,39 @@
+extends ../layout/octo
+
+include ../partial/mixin/options
+
+block content
+    if (error)
+        div.alert.alert-danger #{error}
+    div.panel.panel-custom
+        form(method="POST",action="/octo/tickets/create").form-horizontal
+            input(type="hidden", value=current.client.name, name='client', readonly)#client.form-control
+            div.row
+                div.col-sm-12
+                    div.col-md-5
+                        h2 Nieuwe ticket
+                        p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            ul
+                                li Lorem Ipsum
+                                li Lorem Ipsum
+                                li Lorem Ipsum
+                                li Lorem Ipsum
+                            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    div.col-md-7
+                        div.form-group
+                            div.col-xs-12
+                                label(for="title") Title
+                                input(name='title')#title.form-control
+                        div.form-group
+                            div.col-xs-12
+                                label(for="title") Beschrijving
+                                textarea(rows="10", style="resize:vertical;").form-control
+                        div.form-group
+                            div.col-xs-12
+                                label(for="priority") Priority
+                                select(name='priority')#priority.form-control
+                                    +options(options.priorities, "Low")
+                        div.form-group.pull-right
+                            div.col-xs-12
+                                button.btn.btn-primary Create
+

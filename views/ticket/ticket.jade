@@ -3,8 +3,6 @@ extends ../layout/octo
 include ../partial/mixin/options
 
 block content
-    if (error)
-        div.alert.alert-danger #{error}
     div.panel.panel-custom
         form(method="POST",action="/octo/tickets/"+ticket.id).form-horizontal
             input(type="hidden", name="_method", value="PUT")
@@ -16,7 +14,6 @@ block content
                         p
                             span(class="label label-"+options.priority[ticket.priority])= ticket.priority
                             span(class="label label-"+options.status[ticket.status])= ticket.status
-                        div.form-group
                         div.col-sm-12
                             div.form-group
                                 textarea(readonly, rows="10", style="resize:vertical;").form-control #{ticket.description}
