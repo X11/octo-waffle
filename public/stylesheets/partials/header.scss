@@ -19,7 +19,7 @@ body > header {
 }
 
 .heading {
-    background: url('/images/bigbg.png');
+    background: url('/dist/images/bigbg.png');
     background-repeat: no-repeat;
     background-size: 100% auto;
     padding-top: 60px !important;
@@ -42,6 +42,6 @@ body > header {
     }
 
     &.city {
-        background-image: url('/images/dubaibg.jpg');
+        background-image: url('/dist/images/dubaibg.jpg');
     }
 }
