@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
             title: "Bedrijven",
             heading: {
                 title: "Bedrijven",
-                tagline: "Media college 2015",
+                tagline: "Mediacollege 2015",
                 bg: 'city'
             },
             error: err,
