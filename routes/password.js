@@ -4,7 +4,7 @@ var crypto = require("crypto");
 var passwords = require('./../config/access.json');
 
 router.get('/', function(req, res, next) {
-	res.render('password', {
+	res.render('base/password', {
         title: "VuurVechters | Geen probleem.",
 		message: req.flash('message'),
         heading: {

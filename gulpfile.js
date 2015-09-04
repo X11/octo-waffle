@@ -78,7 +78,7 @@ gulp.task('server', function() {
     nodemon({
         script: './app.js',
         ext: ['js'],
-        watch: ["routes", "config"],
+        watch: ["lib", "routes", "config"],
         env: {
             'NODE_ENV': 'development',
         },
