@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var db = require('../lib/module.js');
 
 var ticket = require('./octo/ticket');
 var client = require('./octo/client');
@@ -10,21 +11,7 @@ router.use(function(req, res, next) {
         heading: {
             title: "Vuurvechters",
         },
-        options: {
-            status: {
-                "Open": "success",
-                "Assigned": "default",
-                "primary": "default"
-            },
-            statuses: ["Open", "Assigned", "Closed"],
-            priority: {
-                "High": "danger",
-                "Normal": "primary",
-                "Low": "default"
-            },
-            priorities: ["High", "Normal", "Low"],
-            workers: ["Terence", "Mirko", "Koen", "Tom"]
-        },
+        options: db.options,
         links: [{
             name: "Tickets",
             href: '/octo/tickets/',
