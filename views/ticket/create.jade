@@ -22,18 +22,23 @@ block content
                     div.col-md-7
                         div.form-group
                             div.col-xs-12
-                                label(for="title") Title
-                                input(name='title')#title.form-control
+                                label(for="title") Titel
+                                input(name='title', required)#title.form-control
+                        div.form-group
+                            div.col-xs-12
+                                label(for="title") Categorie
+                                select(name='category', required)#categori.form-control
+                                    option(selected, disabled, hidden, value='')
+                                    +options(["Advies", "Ondersteuning"])
                         div.form-group
                             div.col-xs-12
                                 label(for="title") Beschrijving
-                                textarea(name="description", rows="10", style="resize:vertical;").form-control
+                                textarea(name="description", rows="10", style="resize:vertical;", required).form-control
                         div.form-group
                             div.col-xs-12
                                 label(for="priority") Priority
-                                select(name='priority')#priority.form-control
+                                select(name='priority', required)#priority.form-control
                                     +options(options.priorities, "Low")
                         div.form-group.pull-right
                             div.col-xs-12
                                 button.btn.btn-primary Create
-

@@ -1,0 +1,23 @@
+extends ../layout/octo
+
+include ../partial/mixin/options
+
+block content
+    form(method="POST").form-horizontal
+        div.col-md-4.col-md-push-4
+            div.form-group
+                div.col-xs-12
+                    label(for="loginas") Login als:
+                    select(name='loginas', required)#loginas.form-control
+                        +options(["Client", "Worker"])
+            div.form-group
+                div.col-xs-12
+                    label(for="user") Gebruikersnaam
+                    input(name='user', required)#user.form-control
+            div.form-group
+                div.col-xs-12
+                    label(for="pass") Wachtwoord
+                    input(type='password', reuired, name='pass', placeholder="Wachtwoord")#pass.form-control
+            div.form-group.pull-right
+                div.col-xs-12
+                    button.btn.btn-primary Create

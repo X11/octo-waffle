@@ -3,4 +3,4 @@ mixin octonav(links)
         for link in links
             li(class=link.active)
                 a(href=link.href)= link.name
-        li.pull-right: a(href="/auth/logout") Uitloggen
+        li.pull-right: a(href="/octo/auth/logout") Uitloggen

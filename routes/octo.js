@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../lib/module.js');
 
+var auth = require('./octo/auth.js');
 var ticket = require('./octo/ticket');
 var client = require('./octo/client');
 
@@ -24,9 +25,15 @@ router.use(function(req, res, next) {
         if (req.originalUrl.match('^'+link.href))
             link.active = true;
     });
+    if ((mSuccess = req.flash("success").join("")) && mSuccess !== "")
+        res.locals.success = mSuccess;
+    if ((mError = req.flash("error").join("")) && mError !== "")
+        res.locals.error = mError;
+    res.locals.current = req.session.current;
     next();
 });
 
+router.use('/auth', auth);
 router.use('/tickets', ticket);
 router.use('/clients', client);
 router.get('/', function(req, res, next) {

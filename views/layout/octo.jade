@@ -20,12 +20,18 @@ html
         div.container
             div.row
                 div.alert.alert-info Vuurvechters ticketing systeem is momenteel in <b>beta</b>
-            div.row
-                +octonav(links, active)
+            if (success)
+                div.row
+                    div.alert.alert-success.alert.dismissible
+                        button(type="button", data-dismiss="alert").close: span &times;
+                        | #{success}
+            if (error)
+                div.row
+                    div.alert.alert-danger #{error}
+            if (current)
+                div.row
+                    +octonav(links, active)
             div.view-fix
-                if (error)
-                    div.row
-                        div.alert.alert-danger #{error}
             div.row
                 block content
         include ./../partial/footer
