@@ -7,6 +7,16 @@ router.get('/', function(req, res, next) {
         name: "Lorem",
         password: "XXXXXXXXXXXXXXX",
         email: "lorem@ipsum.com"
+    }, {
+        id: 2,
+        name: "Lorem",
+        password: "XXXXXXXXXXXXXXX",
+        email: "lorem@ipsum.com"
+    }, {
+        id: 3,
+        name: "Lorem",
+        password: "XXXXXXXXXXXXXXX",
+        email: "lorem@ipsum.com"
     }];
     res.render('client/index');
 });

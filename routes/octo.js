@@ -49,8 +49,16 @@ router.use(function(req, res, next) {
     next();
 });
 
+// Routes where u need to be loged in
 router.use(['/tickets', '/clients'], function(req, res, next) {
     if (!req.session.current)
+        return res.redirect('/octo/auth/login');
+    next();
+});
+
+// Routes where only workers can come
+router.use(['/clients'], function(req, res, next) {
+    if (req.session.current.role != "Worker")
         return res.redirect('/octo/auth/login');
     next();
 });
