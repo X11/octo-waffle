@@ -8,28 +8,50 @@ var client = require('./octo/client');
 
 router.use(function(req, res, next) {
     res.locals = {
-        title: "VuurVechters | Octo-tickets.",
+        title: "VuurVechters | Octo tickets.",
         heading: {
-            title: "Vuurvechters",
+            title: "Octo tickets",
         },
         options: db.options,
         links: [{
             name: "Tickets",
-            href: '/octo/tickets/',
+            href: '/octo/tickets',
         }, {
             name: "Clients",
-            href: '/octo/clients/',
+            auth: 'Worker',
+            href: '/octo/clients',
         }]
     };
+
+    // Check for active state
     res.locals.links.forEach(function(link, index) {
         if (req.originalUrl.match('^'+link.href))
             link.active = true;
     });
+
+    // Filter the links which they may access
+    res.locals.links = res.locals.links.filter(function(link) {
+        if (!req.session.current || (link.auth && req.session.current.role != link.auth))
+            return false;
+        return true;
+    });
+
+    // Check for error & Success messages
     if ((mSuccess = req.flash("success").join("")) && mSuccess !== "")
         res.locals.success = mSuccess;
     if ((mError = req.flash("error").join("")) && mError !== "")
         res.locals.error = mError;
+
+    // set current
     res.locals.current = req.session.current;
+
+    //
+    next();
+});
+
+router.use(['/tickets', '/clients'], function(req, res, next) {
+    if (!req.session.current)
+        return res.redirect('/octo/auth/login');
     next();
 });
 

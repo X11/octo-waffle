@@ -7,16 +7,16 @@ footer {
     background: #1f1f1f;
     border-top: #3a3a3a;
     padding-top: 15px;
-    height: 60px;
+    height: 130px;
     p {
         font-size: 80%;
     }
 
     a {
-        color: #fff;
+        color: #fff !important;
 
         &:hover {
-            color: #f44;
+            color: #f44 !important;
         }
     }
 }

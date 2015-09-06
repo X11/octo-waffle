@@ -9,6 +9,7 @@ block content
             div.row
                 div.col-sm-12
                     div.col-md-12
+                        a(href="/octo/tickets") Back
                         h2 #{ticket.title}
                     div.col-md-7
                         p
@@ -51,5 +52,7 @@ block content
                                 input(value=ticket.updated_at, name='updated_at', readonly)#updated.form-control
                         div.form-group.pull-right
                             div.col-xs-12
-                                button.btn.btn-primary Update
+                                div.btn-group
+                                    button.btn.btn-danger Verwijderen
+                                    button.btn.btn-primary Updaten
 

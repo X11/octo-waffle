@@ -1,7 +1,12 @@
 extends layout/base
 
 block content
-  h1= message
-  if (error.status)
-      h2= error.status
-      pre #{error.stack}
+    h1= message
+    if (error.stack)
+        pre #{error.stack}
+    p Ga naar:
+    ul.list-unstyled
+        li: a(href="/").btn.btn-link Homepagina
+        li: a(href="/companies").btn.btn-link Bedrijven
+        li: a(href="/manage").btn.btn-link Beheer
+        li: a(href="/octo").btn.btn-link Octo ticket

@@ -3,11 +3,9 @@ extends ../layout/octo
 include ../partial/mixin/options
 
 block content
-    if (error)
-        div.alert.alert-danger #{error}
     div.panel.panel-custom
         form(method="POST",action="/octo/tickets/create").form-horizontal
-            input(type="hidden", value=current.client.name, name='client', readonly)#client.form-control
+            input(type="hidden", value=current.name, name='client')
             div.row
                 div.col-sm-12
                     div.col-md-5
