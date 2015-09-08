@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
         .then(function(vals) {
             left = vals.length;
 
-            if (left === 0) check("Geen bedrijven om weer te geven");
+            if (left === 0) check('Geen bedrijven om weer te geven');
 
             vals.forEach(function(i) {
                 redis
@@ -42,10 +42,10 @@ router.get('/', function(req, res, next) {
     function check(err) {
         if (left > 0) return;
         res.render('base/companies', {
-            title: "Bedrijven",
+            title: 'Bedrijven',
             heading: {
-                title: "Bedrijven",
-                tagline: "Mediacollege 2015",
+                title: 'Bedrijven',
+                tagline: 'Mediacollege 2015',
                 bg: 'city'
             },
             error: err,

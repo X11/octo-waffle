@@ -8,16 +8,16 @@ var client = require('./octo/client');
 
 router.use(function(req, res, next) {
     res.locals = {
-        title: "VuurVechters | Octo tickets.",
+        title: 'VuurVechters | Octo tickets.',
         heading: {
-            title: "Octo tickets",
+            title: 'Octo tickets',
         },
         options: db.options,
         links: [{
-            name: "Tickets",
+            name: 'Tickets',
             href: '/octo/tickets',
         }, {
-            name: "Clients",
+            name: 'Clients',
             auth: 'Worker',
             href: '/octo/clients',
         }]
@@ -37,9 +37,9 @@ router.use(function(req, res, next) {
     });
 
     // Check for error & Success messages
-    if ((mSuccess = req.flash("success").join("")) && mSuccess !== "")
+    if ((mSuccess = req.flash('success').join('')) && mSuccess !== '')
         res.locals.success = mSuccess;
-    if ((mError = req.flash("error").join("")) && mError !== "")
+    if ((mError = req.flash('error').join('')) && mError !== '')
         res.locals.error = mError;
 
     // set current
@@ -58,7 +58,7 @@ router.use(['/tickets', '/clients'], function(req, res, next) {
 
 // Routes where only workers can come
 router.use(['/clients'], function(req, res, next) {
-    if (req.session.current.role != "Worker")
+    if (req.session.current.role != 'Worker')
         return res.redirect('/octo/auth/login');
     next();
 });

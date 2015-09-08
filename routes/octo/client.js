@@ -4,19 +4,19 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.locals.clients = [{
         id: 1,
-        name: "Lorem",
-        password: "XXXXXXXXXXXXXXX",
-        email: "lorem@ipsum.com"
+        name: 'Lorem',
+        password: 'XXXXXXXXXXXXXXX',
+        email: 'lorem@ipsum.com'
     }, {
         id: 2,
-        name: "Lorem",
-        password: "XXXXXXXXXXXXXXX",
-        email: "lorem@ipsum.com"
+        name: 'Lorem',
+        password: 'XXXXXXXXXXXXXXX',
+        email: 'lorem@ipsum.com'
     }, {
         id: 3,
-        name: "Lorem",
-        password: "XXXXXXXXXXXXXXX",
-        email: "lorem@ipsum.com"
+        name: 'Lorem',
+        password: 'XXXXXXXXXXXXXXX',
+        email: 'lorem@ipsum.com'
     }];
     res.render('client/index');
 });
@@ -24,9 +24,9 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     res.locals.client = [{
         id: req.params.id,
-        name: "Lorem",
-        password: "XXXXXXXXXXXXXXX",
-        email: "lorem@ipsum.com"
+        name: 'Lorem',
+        password: 'XXXXXXXXXXXXXXX',
+        email: 'lorem@ipsum.com'
     }];
     res.render('client/client');
 });

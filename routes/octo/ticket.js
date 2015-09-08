@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
         .ticket
         .all()
         .then(function(data) {
-            if (req.session.current.role == "Client")
+            if (req.session.current.role == 'Client')
                 data = data.filter(function(ticket) {
                     return ticket.client == req.session.current.name;
                 });
@@ -26,7 +26,7 @@ router.get('/create', function(req, res, next) {
 router.post('/create', function(req, res, next) {
     console.log(req.body.client, req.session.current.name);
     if (req.body.client != req.session.current.name){
-        req.flash("error", "Error filling in your form");
+        req.flash('error', 'Error filling in your form');
         return res.redirect('/octo/tickets/create');
     }
 

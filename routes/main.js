@@ -3,10 +3,10 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
     res.render('index', {
-        title: "VuurVechters | Geen probleem.",
+        title: 'VuurVechters | Geen probleem.',
         heading: {
-            title: "Vuurvechters",
-            tagline: "Geen probleem"
+            title: 'Vuurvechters',
+            tagline: 'Geen probleem'
         }
     });
 });
