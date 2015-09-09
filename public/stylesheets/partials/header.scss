@@ -17,31 +17,3 @@ body > header {
         }
     }
 }
-
-.heading {
-    background: url('/dist/images/bigbg.png');
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    padding-top: 60px !important;
-    padding-bottom: 60px !important;
-
-
-    @media (max-width: 400px){
-        background-size: auto 100%;
-        background-position: top center;
-    }
-    h1, p {
-        color: #fff !important;
-        display: table;
-        padding: 10px 20px;
-        background: rgba(204,0,0,0.8);
-    }
-
-    p {
-        font-size: 100%;
-    }
-
-    &.city {
-        background-image: url('/dist/images/bridgebg.jpg');
-    }
-}

@@ -4,6 +4,7 @@ var router = express.Router();
 var db = require('./../../lib/module.js');
 
 router.get('/', function(req, res, next) {
+    var sortBy = (req.query.field) ? req.query.field : "created_at";
     db
         .ticket
         .all()
@@ -12,9 +13,14 @@ router.get('/', function(req, res, next) {
                 data = data.filter(function(ticket) {
                     return ticket.client == req.session.current.name;
                 });
+
             res.locals.tickets = data.sort(function(a, b) {
-                return a.created_at < b.created_at;
+                return a[sortBy] > b[sortBy];
             });
+
+            if (req.query.order && req.query.order.toLowerCase() == "desc")
+                res.locals.tickets.reverse();
+
             res.render('ticket/index');
         });
 });
@@ -25,7 +31,7 @@ router.get('/create', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
     console.log(req.body.client, req.session.current.name);
-    if (req.body.client != req.session.current.name){
+    if (req.body.client != req.session.current.name) {
         req.flash('error', 'Error filling in your form');
         return res.redirect('/octo/tickets/create');
     }
@@ -48,13 +54,20 @@ router.get('/:id', function(req, res, next) {
         .ticket
         .get(req.params.id)
         .then(function(data) {
+            if (data.client !== req.session.current.name &&
+                req.session.current.role !== "Worker") {
+                res.status(403);
+                return next(new Error("Ticket not visible for you"));
+            }
             res.locals.ticket = data;
+            res.locals.ticket.id = req.params.id;
             res.render('ticket/ticket');
         });
 });
 
 router.put('/:id', function(req, res, next) {
-    res.redirect('/tickets/' + req.params.id);
+    req.flash("success", "Updated");
+    res.redirect('/octo/tickets/' + req.params.id);
 });
 
 module.exports = router;

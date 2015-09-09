@@ -31,12 +31,14 @@ router.use(function(req, res, next) {
 
     // Filter the links which they may access
     res.locals.links = res.locals.links.filter(function(link) {
-        if (!req.session.current || (link.auth && req.session.current.role != link.auth))
+        if (!req.session.current || (link.auth &&
+                req.session.current.role != link.auth))
             return false;
         return true;
     });
 
     // Check for error & Success messages
+    var mSuccess, mError;
     if ((mSuccess = req.flash('success').join('')) && mSuccess !== '')
         res.locals.success = mSuccess;
     if ((mError = req.flash('error').join('')) && mError !== '')

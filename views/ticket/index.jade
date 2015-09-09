@@ -8,12 +8,26 @@ block content
             thead
                 tr
                     th #
+                        a(href="?field=id&order=desc"): span.caret
+                        a(href="?field=id&order=asc"): span.dropup: span.caret
                     th Title
+                        a(href="?field=title&order=desc"): span.caret
+                        a(href="?field=title&order=asc"): span.dropup: span.caret
                     th Client
-                    th Created_at
-                    th Assigned to
+                        a(href="?field=client&order=desc"): span.caret
+                        a(href="?field=client&order=asc"): span.dropup: span.caret
+                    th Created
+                        a(href="?field=created_at&order=desc"): span.caret
+                        a(href="?field=created_at&order=asc"): span.dropup: span.caret
+                    th Assigned
+                        a(href="?field=assigned&order=desc"): span.caret
+                        a(href="?field=assigned&order=asc"): span.dropup: span.caret
                     th Priority
+                        a(href="?field=priority&order=desc"): span.caret
+                        a(href="?field=proprity&order=asc"): span.dropup: span.caret
                     th Status
+                        a(href="?field=status&order=desc"): span.caret
+                        a(href="?field=status&order=asc"): span.dropup: span.caret
                     th
             tbody
                 each ticket in tickets

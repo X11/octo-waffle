@@ -2,11 +2,13 @@
 // Partials
 @import "partials/reset";
 @import "partials/header";
+@import "partials/heading";
 @import "partials/footer";
 @import "partials/misc";
 
 // Layout specifiek
 @import "layouts/home";
+@import "layouts/octo";
 
 // Custom views
 @import "views/groups";

@@ -14,6 +14,7 @@ block content
                     div.col-md-7
                         p
                             span(class="label label-"+options.priority[ticket.priority])= ticket.priority
+                            | &nbsp;
                             span(class="label label-"+options.status[ticket.status])= ticket.status
                         div.col-sm-12
                             div.form-group
@@ -34,25 +35,24 @@ block content
                         div.form-group
                             label(for="priority").col-sm-2.col-md-3.control-label Priority
                             div.col-sm-10.col-md-9
-                                select(name='priority')#priority.form-control
+                                select(name='priority')&attributes({'readonly': current.role != "Worker"})#priority.form-control
                                     +options(options.priorities, ticket.priority)
                         div.form-group
                             label(for="status").col-sm-2.col-md-3.control-label Status
                             div.col-sm-10.col-md-9
-                                select(name='status')#status.form-control
+                                select(name='status')&attributes({'readonly': current.role != "Worker"})#status.form-control
                                     +options(options.statuses, ticket.status)
                         div.form-group
                             label(for="assigned").col-sm-2.col-md-3.control-label Assigned to
                             div.col-sm-10.col-md-9
-                                select(name='assigned')#assigned.form-control
+                                select(name='assigned')&attributes({'readonly': current.role != "Worker"})#assigned.form-control
                                     +options(options.workers, ticket.assigned)
                         div.form-group
                             label(for="updated").col-sm-2.col-md-3.control-label Updated at
                             div.col-sm-10.col-md-9
                                 input(value=ticket.updated_at, name='updated_at', readonly)#updated.form-control
-                        div.form-group.pull-right
-                            div.col-xs-12
-                                div.btn-group
-                                    button.btn.btn-danger Verwijderen
+                        if (current.role == "Worker")
+                            div.form-group.pull-right
+                                div.col-xs-12
                                     button.btn.btn-primary Updaten
 
