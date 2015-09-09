@@ -5,6 +5,7 @@ var db = require('./../../lib/module.js');
 
 router.get('/', function(req, res, next) {
     var sortBy = (req.query.field) ? req.query.field : "created_at";
+    var order = (req.query.order) ? req.query.order.toLowerCase() : "desc";
     db
         .ticket
         .all()
@@ -18,7 +19,7 @@ router.get('/', function(req, res, next) {
                 return a[sortBy] > b[sortBy];
             });
 
-            if (req.query.order && req.query.order.toLowerCase() == "desc")
+            if (order == "desc")
                 res.locals.tickets.reverse();
 
             res.render('ticket/index');
