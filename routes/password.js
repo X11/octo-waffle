@@ -27,7 +27,7 @@ router.post('/', function(req, res, next) {
 		req.session.accessLevel = passwords[hashed];
         // Bug fix of the session i assume
         req.session.save(function() {
-            req.flash('success', 'Wachtwoord geaccepteerd, Toegang tot: #' + passwords[hashed]);
+            req.flash('success', 'Wachtwoord geaccepteerd, Toegang tot: #' + passwords[hashed]); //jshint ignore:line
             res.redirect('/manage');
         });
 	} else {

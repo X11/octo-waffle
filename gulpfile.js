@@ -87,7 +87,23 @@ gulp.task('server', function() {
 });
 
 gulp.task('lint', function() {
-    //todo
+    return gulp.src(["./lib/**/*.js", "./routes/**/*.js", "./config/**/*.js"])
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish))
+        .pipe(notify(function(file) {
+            if (file.jshint.success) return false;
+
+            var errors = file.jshint.results.map(function(data) {
+                if (data.error)
+                    return "(" + data.error.line + ':' + data.error.character + ') ' + data.error.reason; // jshint ignore:line
+            }).join("\n");
+
+            return {
+                title: "Gulp JSHint notification",
+                message: file.relative + " (" + file.jshint.results.length + " errors)\n" + errors, // jshint ignore:line
+                icon: ""
+            };
+        }));
 });
 
 gulp.task('client', ['images', 'scripts', 'sass']);

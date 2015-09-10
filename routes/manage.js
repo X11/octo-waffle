@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     if (req.session.accessLevel != '*'){
         left = 1;
         redis
-            .hmget('group:' + req.session.accessLevel, 'logo', 'description', 'url', 'members', 'name')
+            .hmget('group:' + req.session.accessLevel, 'logo', 'description', 'url', 'members', 'name') // jshint ignore:line
             .then(function(data) {
                 postGet(data, req.session.accessLevel);
             })
@@ -43,7 +43,7 @@ router.get('/', function(req, res, next) {
                     throw new Error('No groups to display');
                 vals.forEach(function(i) {
                     redis
-                        .hmget('group:' + i, 'logo', 'description', 'url', 'members', 'name')
+                        .hmget('group:' + i, 'logo', 'description', 'url', 'members', 'name') // jshint ignore:line
                         .then(function(data) {
                             postGet(data, i);
                         });

@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 
             vals.forEach(function(i) {
                 redis
-                    .hmget('group:' + i, 'logo', 'description', 'url', 'members', 'name')
+                    .hmget('group:' + i, 'logo', 'description', 'url', 'members', 'name') // jshint ignore:line
                     .then(function(data) {
                         postGet(data, i);
                     });
