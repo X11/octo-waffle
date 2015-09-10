@@ -37,6 +37,14 @@ router.post('/create', function(req, res, next) {
         return res.redirect('/octo/tickets/create');
     }
 
+    var fields = ["client", "title", "category", "description", "priority"];
+    if (fields.length !== Object.keys(req.body).length){
+        req.flash('error', 'Error filling in your form');
+        return res.redirect('/octo/tickets/create');
+    }
+
+    req.body.title = '[' + req.body.category + '] ' + req.body.title;
+
     db
         .ticket
         .create(req.body)
@@ -55,6 +63,11 @@ router.get('/:id', function(req, res, next) {
         .ticket
         .get(req.params.id)
         .then(function(data) {
+            if (Object.keys(data).length === 0){
+                res.status(404);
+                return next(new Error("Ticket not found"));
+            }
+
             if (data.client !== req.session.current.name &&
                 req.session.current.role !== "Worker") {
                 res.status(403);
