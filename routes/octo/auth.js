@@ -45,7 +45,10 @@ router.post('/login', function(req, res, next) {
             res.redirect('/octo/auth/login');
         });
     else {
-        if (req.body.pass == "joeyzuigt") {
+        var sha256 = crypto.createHash('sha256');
+        sha256.update(req.body.pass, 'utf8');
+        var hashed = sha256.digest('hex');
+        if (req.body.pass == "80db32cfd2dd643203c9141c01d366e8bdcbb611ab969c3e44b5c631878cde06"){ // jshint ignore:line
             req.session.current = {
                 role: req.body.loginas,
                 name: req.body.user,
