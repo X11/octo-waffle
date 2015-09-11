@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var Q = require('q');
 
-var db = require('./../../lib/module.js');
+//var db = require('./../../lib/module.js');
+var db = require('Octagon');
 
 router.get('/', function(req, res, next) {
     var sortBy = (req.query.field) ? req.query.field : "created_at";
@@ -9,20 +11,31 @@ router.get('/', function(req, res, next) {
     db
         .ticket
         .all()
-        .then(function(data) {
-            if (req.session.current.role == 'Client')
-                data = data.filter(function(ticket) {
-                    return ticket.client == req.session.current.name;
-                });
-
-            res.locals.tickets = data.sort(function(a, b) {
-                return a[sortBy] > b[sortBy];
+        .then(function(ids) {
+            var promises = [];
+            ids.forEach(function(id) {
+                promises.push(db.ticket.get(id));
             });
+            Q
+                .all(promises)
+                .then(function(data) {
+                    if (req.session.current.role == 'Client')
+                        data = data.filter(function(ticket) {
+                            return ticket.client == req.session.current.name;
+                        });
 
-            if (order == "desc")
-                res.locals.tickets.reverse();
+                    res.locals.tickets = data.sort(function(a, b) {
+                        return a[sortBy] > b[sortBy];
+                    });
 
-            res.render('ticket/index');
+                    if (order == "desc")
+                        res.locals.tickets.reverse();
+
+                    res.render('ticket/index');
+                })
+                .catch(function(err) {
+                    return err;
+                });
         });
 });
 
@@ -31,7 +44,6 @@ router.get('/create', function(req, res, next) {
 });
 
 router.post('/create', function(req, res, next) {
-    console.log(req.body.client, req.session.current.name);
     if (req.body.client != req.session.current.name) {
         req.flash('error', 'Error filling in your form');
         return res.redirect('/octo/tickets/create');
@@ -47,13 +59,14 @@ router.post('/create', function(req, res, next) {
 
     db
         .ticket
-        .create(req.body)
+        .create(req.body, req.session.current.id)
         .then(function() {
             // flash message here
+            req.flash('success', "Nieuwe ticket gemaakt");
             res.redirect('/octo/tickets/');
         })
-        .catch(function() {
-            // flash message here
+        .catch(function(err) {
+            req.flash('error', err.message);
             res.redirect('/octo/tickets/');
         });
 });
@@ -80,8 +93,28 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-    req.flash("success", "Updated");
-    res.redirect('/octo/tickets/' + req.params.id);
+    var fields = ["priority", "status", "assigned"];
+    var attrs = {};
+    fields.forEach(function(field) {
+        attrs[field] = req.body[field];
+    });
+    attrs.updated = (new Date().toLocaleDateString()) + " " + (new Date().toLocaleTimeString()); // jshint ignore:line
+    if (req.session.current.role == "Worker"){
+        return db
+            .ticket
+            .update(req.params.id, attrs)
+            .then(function(result) {
+                req.flash("success", "Updated");
+                res.redirect('/octo/tickets/' + req.params.id);
+            })
+            .catch(function(err) {
+                req.flash("error", err.message);
+                res.redirect('/octo/tickets/' + req.params.id);
+            });
+    } else {
+        req.flash("error", "Geen rechten");
+        res.redirect('/octo/tickets/' + req.params.id);
+    }
 });
 
 module.exports = router;

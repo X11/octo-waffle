@@ -1,24 +1,28 @@
 var express = require('express');
+var Q = require("q");
 var router = express.Router();
 
+var db = require("Octagon");
+
 router.get('/', function(req, res, next) {
-    res.locals.clients = [{
-        id: 1,
-        name: 'Lorem',
-        password: 'XXXXXXXXXXXXXXX',
-        email: 'lorem@ipsum.com'
-    }, {
-        id: 2,
-        name: 'Lorem',
-        password: 'XXXXXXXXXXXXXXX',
-        email: 'lorem@ipsum.com'
-    }, {
-        id: 3,
-        name: 'Lorem',
-        password: 'XXXXXXXXXXXXXXX',
-        email: 'lorem@ipsum.com'
-    }];
-    res.render('client/index');
+    db
+        .client
+        .all()
+        .then(function(ids) {
+            var promises = [];
+            ids.forEach(function(id) {
+                promises.push(db.client.get(id));
+            });
+            Q
+                .all(promises)
+                .then(function(data) {
+                    res.locals.clients = data;
+                    res.render('client/index');
+                })
+                .catch(function(err) {
+                    return err;
+                });
+        });
 });
 
 router.get('/:id', function(req, res, next) {

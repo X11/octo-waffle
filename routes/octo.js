@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../lib/module.js');
+//var db = require('../lib/module.js');
+var db = require('Octagon');
 
 var auth = require('./octo/auth.js');
 var ticket = require('./octo/ticket');
