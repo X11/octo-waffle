@@ -6,7 +6,7 @@ var Q = require('q');
 var db = require('Octagon');
 
 router.get('/', function(req, res, next) {
-    var sortBy = (req.query.field) ? req.query.field : "created_at";
+    var sortBy = (req.query.field) ? req.query.field : "created";
     var order = (req.query.order) ? req.query.order.toLowerCase() : "desc";
     db
         .ticket
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
                     res.locals.tickets = data.sort(function(a, b) {
                         return a[sortBy] > b[sortBy];
                     });
-
+                    console.log(res.locals.tickets);
                     if (order == "desc")
                         res.locals.tickets.reverse();
 
@@ -117,5 +117,33 @@ router.put('/:id', function(req, res, next) {
     }
 });
 
-module.exports = router;
+router.delete('/:id', function(req, res, next) {
+    db
+        .ticket
+        .get(req.params.id)
+        .then(function(data) {
+            if (Object.keys(data).length === 0){
+                res.status(404);
+                return next(new Error("Ticket not found."));
+            }
+            if (data.client !== req.session.current.name &&
+                req.session.current.role !== "Worker") {
+                res.status(403);
+                return next(new Error("Ticket not visible for you."));
+            }
 
+            db
+                .ticket
+                .remove(req.params.id)
+                .then(function(status) {
+                    req.flash('success', "Ticket verwijdered.");
+                    res.redirect('/octo/tickets/');
+                })
+                .catch(function(err) {
+                    req.flash('error', err.message);
+                    res.redirect('/octo/tickets/');
+                });
+        });
+});
+
+module.exports = router;
