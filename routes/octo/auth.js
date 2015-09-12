@@ -32,16 +32,16 @@ router.post('/login', function(req, res, next) {
                     name: allowed.name,
                     id: allowed.id
                 };
-                req.flash('success', 'Welcome ' + req.session.current.name);
+                req.flash('success', 'Welcome ' + req.session.current.name + "!"); // jshint ignore:line
                 res.redirect('/octo/tickets');
             } else {
                 req.session.current = null;
-                req.flash('error', 'Email en/of wachtwoord is fout');
+                req.flash('error', 'Email en/of wachtwoord is fout.');
                 res.redirect('/octo/auth/login');
             }
         })
         .catch(function(err) {
-            req.flash('error', '# Email en/of wachtwoord is fout');
+            req.flash('error', '# Email en/of wachtwoord is fout.');
             res.redirect('/octo/auth/login');
         });
     else {
@@ -54,10 +54,10 @@ router.post('/login', function(req, res, next) {
                 name: req.body.user,
                 id: 0,
             };
-            req.flash('success', 'Welcome ' + req.session.current.name);
+            req.flash('success', 'Welcome ' + req.session.current.name + "!");
             res.redirect('/octo/tickets');
         } else {
-            req.flash('error', 'Email en/of wachtwoord is fout');
+            req.flash('error', 'Email en/of wachtwoord is fout.');
             res.redirect('/octo/auth/login');
         }
     }
@@ -77,7 +77,7 @@ router.get('/register', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
     if (req.body.pass != req.body.pass2) {
-        req.flash("error", "Wachtwoord komt niet overeen");
+        req.flash("error", "Wachtwoord komt niet overeen.");
         return res.redirect('/octo/auth/register');
     }
 
@@ -89,11 +89,11 @@ router.post('/register', function(req, res, next) {
             email: req.body.email
         })
         .then(function() {
-            req.flash("success", "Geregisteerd " + req.body.user + ". U kunt nu inloggen"); // jshint ignore:line
+            req.flash("success", "Geregisteerd " + req.body.user + ". U kunt nu inloggen!"); // jshint ignore:line
             res.redirect('/octo/auth/login');
         })
         .catch(function(err) {
-            req.flash("error", "Er ging iets verkeerds. " + err.message);
+            req.flash("error", "Er ging iets verkeerds. " + err.message + ".");
             res.redirect('/octo/auth/register');
         });
 });
