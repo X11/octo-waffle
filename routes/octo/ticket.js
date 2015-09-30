@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
                 .then(function(data) {
                     if (req.session.current.role == 'Client')
                         data = data.filter(function(ticket) {
-                            return ticket.client == req.session.current.name;
+                            return ticket.client == req.session.current.id;
                         });
 
                     res.locals.tickets = data.sort(function(a, b) {
