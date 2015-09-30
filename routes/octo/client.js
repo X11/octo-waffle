@@ -4,6 +4,7 @@ var router = express.Router();
 
 var db = require("Octagon");
 
+// Get all users
 router.get('/', function(req, res, next) {
     db
         .client
@@ -17,27 +18,12 @@ router.get('/', function(req, res, next) {
                 .all(promises)
                 .then(function(data) {
                     res.locals.clients = data;
-                    res.render('client/index');
+                    res.render('octo/client/index');
                 })
                 .catch(function(err) {
                     return err;
                 });
         });
-});
-
-router.get('/:id', function(req, res, next) {
-    res.locals.client = [{
-        id: req.params.id,
-        name: 'Lorem',
-        password: 'XXXXXXXXXXXXXXX',
-        email: 'lorem@ipsum.com'
-    }];
-    res.render('client/client');
-});
-
-router.put('/:id', function(req, res, next) {
-    console.log(req.body);
-    res.redirect('/octo/clients/' + req.params.id);
 });
 
 module.exports = router;

@@ -4,15 +4,17 @@ var crypto = require('crypto');
 
 var db = require('Octagon');
 
+// Redirect to the right URL
 router.get('/', function(req, res, next) {
     res.redirect('/octo/auth/login');
 });
 
+// Show the login form
 router.get('/login', function(req, res, next) {
     if (req.session.current)
         res.redirect('/octo/tickets');
 
-    res.render('auth/login', {
+    res.render('octo/auth/login', {
         title: 'VuurVechters | Geen probleem.',
         heading: {
             title: 'Login',
@@ -20,6 +22,7 @@ router.get('/login', function(req, res, next) {
     });
 });
 
+// Login
 router.post('/login', function(req, res, next) {
     if (req.body.loginas == "Client")
         db
@@ -63,11 +66,12 @@ router.post('/login', function(req, res, next) {
     }
 });
 
+// show the register form
 router.get('/register', function(req, res, next) {
     if (req.session.current)
         res.redirect("/octo/tickets");
 
-    res.render('auth/register', {
+    res.render('octo/auth/register', {
         title: "VuurVechters | Geen probleem.",
         heading: {
             title: 'Registeren',
@@ -75,6 +79,7 @@ router.get('/register', function(req, res, next) {
     });
 });
 
+// Register the user
 router.post('/register', function(req, res, next) {
     if (req.body.pass != req.body.pass2) {
         req.flash("error", "Wachtwoord komt niet overeen.");

@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var Q = require('q');
 
-//var db = require('./../../lib/module.js');
 var db = require('Octagon');
 
+// Get all tickets
 router.get('/', function(req, res, next) {
     var sortBy = (req.query.field) ? req.query.field : "created";
     var order = (req.query.order) ? req.query.order.toLowerCase() : "desc";
@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
                     if (order == "desc")
                         res.locals.tickets.reverse();
 
-                    res.render('ticket/index');
+                    res.render('octo/ticket/index');
                 })
                 .catch(function(err) {
                     return err;
@@ -39,10 +39,12 @@ router.get('/', function(req, res, next) {
         });
 });
 
+// Show the creation form
 router.get('/create', function(req, res, next) {
-    res.render('ticket/create');
+    res.render('octo/ticket/create');
 });
 
+// Create an ticket
 router.post('/create', function(req, res, next) {
     if (req.body.client != req.session.current.name) {
         req.flash('error', 'Error filling in your form.');
@@ -71,6 +73,7 @@ router.post('/create', function(req, res, next) {
         });
 });
 
+// Get a single ticket
 router.get('/:id', function(req, res, next) {
     db
         .ticket
@@ -88,10 +91,11 @@ router.get('/:id', function(req, res, next) {
             }
             res.locals.ticket = data;
             res.locals.ticket.id = req.params.id;
-            res.render('ticket/ticket');
+            res.render('octo/ticket/ticket');
         });
 });
 
+// update a single ticket
 router.put('/:id', function(req, res, next) {
     var fields = ["priority", "status", "assigned"];
     var attrs = {};
@@ -117,6 +121,7 @@ router.put('/:id', function(req, res, next) {
     }
 });
 
+// delete a single ticket
 router.delete('/:id', function(req, res, next) {
     db
         .ticket
