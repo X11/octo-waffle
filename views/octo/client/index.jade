@@ -1,6 +1,8 @@
 extends ../../layout/octo
 
 block content
+    form(method="POST")#FORM_DELETE
+        input(type="hidden", name="_method", value="DELETE")
     div.panel.panel-custom
         table.table
             thead
@@ -14,3 +16,5 @@ block content
                         td= client.id
                         td= client.name
                         td= client.email
+                        td
+                            button(onclick="return window.confirm('weet je dit zeker?');", form="FORM_DELETE", formaction="/octo/clients/"+client.id).btn.btn-danger.btn-xs: i.fa.fa-trash

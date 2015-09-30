@@ -26,5 +26,33 @@ router.get('/', function(req, res, next) {
         });
 });
 
+// delete a single user
+router.delete('/:id', function(req, res, next) {
+    db.client
+        .get(req.params.id)
+        .then(function(data) {
+            if (Object.keys(data).length === 0){
+                res.status(404);
+                return next(new Error("Client not found."));
+            }
+            if (data.client !== req.session.current.name &&
+                req.session.current.role !== "Worker") {
+                res.status(403);
+                return next(new Error("Client not visible for you."));
+            }
+
+            db.client
+                .remove(req.params.id)
+                .then(function(status) {
+                    req.flash('success', "Client verwijdered.");
+                    res.redirect('/octo/clients/');
+                })
+                .catch(function(err) {
+                    req.flash('error', err.message);
+                    res.redirect('/octo/clients/');
+                });
+        });
+});
+
 module.exports = router;
 
