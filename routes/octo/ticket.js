@@ -27,7 +27,6 @@ router.get('/', function(req, res, next) {
                     res.locals.tickets = data.sort(function(a, b) {
                         return a[sortBy] > b[sortBy];
                     });
-                    console.log(res.locals.tickets);
                     if (order == "desc")
                         res.locals.tickets.reverse();
 
@@ -95,21 +94,16 @@ router.get('/:id', function(req, res, next) {
                 .from(req.params.id)
                 .then(function(comments) {
                     data.comments = comments;
-                    console.log(comments);
 
                     // RETURN EMPTY ARRAY WHEN NO COMMENTS FOUND PLS
-                    //res.locals.ticket = data;
-                    //res.locals.ticket.id = req.params.id;
-                    //res.render('octo/ticket/ticket');
+                    res.locals.ticket = data;
+                    res.locals.ticket.id = req.params.id;
+                    res.render('octo/ticket/ticket');
                 }).catch(function(err) {
                     req.flash("error", err.message);
                     res.redirect('/octo/tickets/');
                 });
 
-            // REMOVE THIS WHEN U RETURN AN EMPTY ARRAY
-            res.locals.ticket = data;
-            res.locals.ticket.id = req.params.id;
-            res.render('octo/ticket/ticket');
         });
 });
 
@@ -187,6 +181,27 @@ router.post('/:id/comment/create', function(req, res, next) {
         .then(function() {
             // flash message here
             req.flash('success', "Nieuwe reactie geplaatst");
+            res.redirect('/octo/tickets/' + req.params.id);
+        })
+        .catch(function(err) {
+            req.flash('error', err.message);
+            res.redirect('/octo/tickets/' + req.params.id);
+        });
+});
+
+// delete a single ticket
+router.delete('/:id/comment/delete/:cid', function(req, res, next) {
+
+    if (req.session.current.role !== "Worker") {
+        res.status(403);
+        return next(new Error("Method not useable for you."));
+    }
+
+    db.comment
+        .remove(req.params.id, req.params.cid)
+        .then(function() {
+            // flash message here
+            req.flash('success', "Reactie verwijdered");
             res.redirect('/octo/tickets/' + req.params.id);
         })
         .catch(function(err) {

@@ -4,6 +4,8 @@ include ../../partial/mixin/options
 
 block content
     div.panel.panel-custom
+        form(method="POST")#FORM_DELETE
+            input(type="hidden", name="_method", value="DELETE")
         form(method="POST",action="/octo/tickets/"+ticket.id)#DELETE_TICKET.form-horizontal
             input(type="hidden", name="_method", value="DELETE")
         form(method="POST",action="/octo/tickets/"+ticket.id).form-horizontal
@@ -28,6 +30,8 @@ block content
                                 each comment in ticket.comments
                                     hr
                                     h4 #{comment.client}
+                                        if (current.role == "Worker")
+                                            button(onclick="return window.confirm('weet je dit zeker?');", form="FORM_DELETE", formaction="/octo/tickets/"+ticket.id+"/comment/delete/"+comment.id).btn.btn-danger.btn-xs.pull-right: i.fa.fa-trash
                                     textarea(readonly, rows="4", style="resize:vertical;").form-control #{comment.content}
                     div.col-xs-5
                         div.form-group
