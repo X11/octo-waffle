@@ -52,7 +52,7 @@ router.post('/create', function(req, res, next) {
     }
 
     var fields = ["client", "title", "category", "description", "priority"];
-    if (fields.length !== Object.keys(req.body).length){
+    if (fields.length !== Object.keys(req.body).length) {
         req.flash('error', 'Error filling in your form.');
         return res.redirect('/octo/tickets/create');
     }
@@ -79,7 +79,7 @@ router.get('/:id', function(req, res, next) {
         .ticket
         .get(req.params.id)
         .then(function(data) {
-            if (Object.keys(data).length === 0){
+            if (Object.keys(data).length === 0) {
                 res.status(404);
                 return next(new Error("Ticket not found."));
             }
@@ -89,6 +89,24 @@ router.get('/:id', function(req, res, next) {
                 res.status(403);
                 return next(new Error("Ticket not visible for you."));
             }
+
+            // get comments
+            db.comment
+                .from(req.params.id)
+                .then(function(comments) {
+                    data.comments = comments;
+                    console.log(comments);
+
+                    // RETURN EMPTY ARRAY WHEN NO COMMENTS FOUND PLS
+                    //res.locals.ticket = data;
+                    //res.locals.ticket.id = req.params.id;
+                    //res.render('octo/ticket/ticket');
+                }).catch(function(err) {
+                    req.flash("error", err.message);
+                    res.redirect('/octo/tickets/');
+                });
+
+            // REMOVE THIS WHEN U RETURN AN EMPTY ARRAY
             res.locals.ticket = data;
             res.locals.ticket.id = req.params.id;
             res.render('octo/ticket/ticket');
@@ -103,7 +121,7 @@ router.put('/:id', function(req, res, next) {
         attrs[field] = req.body[field];
     });
     attrs.updated = (new Date().toLocaleDateString()) + " " + (new Date().toLocaleTimeString()); // jshint ignore:line
-    if (req.session.current.role == "Worker"){
+    if (req.session.current.role == "Worker") {
         return db
             .ticket
             .update(req.params.id, attrs)
@@ -127,7 +145,7 @@ router.delete('/:id', function(req, res, next) {
         .ticket
         .get(req.params.id)
         .then(function(data) {
-            if (Object.keys(data).length === 0){
+            if (Object.keys(data).length === 0) {
                 res.status(404);
                 return next(new Error("Ticket not found."));
             }
@@ -151,4 +169,31 @@ router.delete('/:id', function(req, res, next) {
         });
 });
 
+// Create an comment ticket
+router.post('/:id/comment/create', function(req, res, next) {
+    if (req.body.client != req.session.current.name) {
+        req.flash('error', 'Error filling in your form.');
+        return res.redirect('/octo/tickets/' + req.params.id);
+    }
+
+    var fields = ["client", "content"];
+    if (fields.length !== Object.keys(req.body).length) {
+        req.flash('error', 'Error filling in your form.');
+        return res.redirect('/octo/tickets/' + req.params.id);
+    }
+
+    db.comment
+        .create(req.params.id, req.body)
+        .then(function() {
+            // flash message here
+            req.flash('success', "Nieuwe reactie geplaatst");
+            res.redirect('/octo/tickets/' + req.params.id);
+        })
+        .catch(function(err) {
+            req.flash('error', err.message);
+            res.redirect('/octo/tickets/' + req.params.id);
+        });
+});
+
 module.exports = router;
+
