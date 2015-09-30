@@ -83,7 +83,7 @@ router.get('/:id', function(req, res, next) {
                 return next(new Error("Ticket not found."));
             }
 
-            if (data.client !== req.session.current.name &&
+            if (data.client !== req.session.current.id &&
                 req.session.current.role !== "Worker") {
                 res.status(403);
                 return next(new Error("Ticket not visible for you."));
@@ -143,7 +143,7 @@ router.delete('/:id', function(req, res, next) {
                 res.status(404);
                 return next(new Error("Ticket not found."));
             }
-            if (data.client !== req.session.current.name &&
+            if (data.client !== req.session.current.id &&
                 req.session.current.role !== "Worker") {
                 res.status(403);
                 return next(new Error("Ticket not visible for you."));
