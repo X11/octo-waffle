@@ -7,68 +7,68 @@ block content
         input(type="hidden", name="_method", value="DELETE")
     form(method="POST",action="/octo/tickets/"+ticket.id)#DELETE_TICKET.form-horizontal
         input(type="hidden", name="_method", value="DELETE")
-    form(method="POST",action="/octo/tickets/"+ticket.id).form-horizontal
-        input(type="hidden", name="_method", value="PUT")
         div.row
-            div.col-sm-12
-                a(href="/octo/tickets") Back
-                if (current.role == "Worker" || (current.role == "Client" && ticket.status == "Open"))
-                    div.pull-right
-                        button(onclick="return window.confirm('weet je dit zeker?');", form="DELETE_TICKET").btn.btn-danger: i.fa.fa-trash
-                h2 #{ticket.title}
-                div.col-sm-7
-                    p
-                        span(class="label label-"+options.priority[ticket.priority])= ticket.priority
-                        | &nbsp;
-                        span(class="label label-"+options.status[ticket.status])= ticket.status
-                    div.col-sm-12
+            form(method="POST",action="/octo/tickets/"+ticket.id).form-horizontal
+                input(type="hidden", name="_method", value="PUT")
+                div.col-sm-12
+                    a(href="/octo/tickets") Back
+                    if (current.role == "Worker" || (current.role == "Client" && ticket.status == "Open"))
+                        div.pull-right
+                            button(onclick="return window.confirm('weet je dit zeker?');", form="DELETE_TICKET").btn.btn-danger: i.fa.fa-trash
+                    h2 #{ticket.title}
+                    div.col-sm-7
+                        p
+                            span(class="label label-"+options.priority[ticket.priority])= ticket.priority
+                            | &nbsp;
+                            span(class="label label-"+options.status[ticket.status])= ticket.status
+                        div.col-sm-12
+                            div.form-group
+                                textarea(readonly, rows="10", style="resize:vertical;").form-control #{ticket.description}
+                        if ticket.comments
+                            div.col-sm-11.pull-right
+                                each comment in ticket.comments
+                                    hr
+                                    h4 #{comment.client}
+                                        if (current.role == "Worker")
+                                            button(onclick="return window.confirm('weet je dit zeker?');", form="FORM_DELETE", formaction="/octo/tickets/"+ticket.id+"/comment/delete/"+comment.id).btn.btn-danger.btn-xs.pull-right: i.fa.fa-trash
+                                    textarea(readonly, rows="4", style="resize:vertical;").form-control #{comment.content}
+                    div.col-xs-5
                         div.form-group
-                            textarea(readonly, rows="10", style="resize:vertical;").form-control #{ticket.description}
-                    if ticket.comments
-                        div.col-sm-11.pull-right
-                            each comment in ticket.comments
-                                hr
-                                h4 #{comment.client}
-                                    if (current.role == "Worker")
-                                        button(onclick="return window.confirm('weet je dit zeker?');", form="FORM_DELETE", formaction="/octo/tickets/"+ticket.id+"/comment/delete/"+comment.id).btn.btn-danger.btn-xs.pull-right: i.fa.fa-trash
-                                textarea(readonly, rows="4", style="resize:vertical;").form-control #{comment.content}
-                div.col-xs-5
-                    div.form-group
-                        label(for="id").col-sm-2.col-md-3.control-label #
-                        div.col-sm-10.col-md-9
-                            input(value=ticket.id, name='id', readonly)#id.form-control
-                    div.form-group
-                        label(for="client").col-sm-2.col-md-3.control-label Client
-                        div.col-sm-10.col-md-9
-                            input(value=ticket.client, name='client', readonly)#client.form-control
-                    div.form-group
-                        label(for="created").col-sm-2.col-md-3.control-label Gemaakt op
-                        div.col-sm-10.col-md-9
-                            input(value=ticket.created, name='created', readonly)#created.form-control
-                    div.form-group
-                        label(for="priority").col-sm-2.col-md-3.control-label Prioriteit
-                        div.col-sm-10.col-md-9
-                            select(name='priority')&attributes({'disabled': current.role != "Worker"})#priority.form-control
-                                +options(options.priorities, ticket.priority)
-                    div.form-group
-                        label(for="status").col-sm-2.col-md-3.control-label Status
-                        div.col-sm-10.col-md-9
-                            select(name='status')&attributes({'disabled': current.role != "Worker"})#status.form-control
-                                +options(options.statuses, ticket.status)
-                    div.form-group
-                        label(for="assigned").col-sm-2.col-md-3.control-label Toegewezen
-                        div.col-sm-10.col-md-9
-                            select(name='assigned')&attributes({'disabled': current.role != "Worker"})#assigned.form-control
-                                option(selected, disabled, hidden, value='')
-                                +options(options.workers, ticket.assigned)
-                    div.form-group
-                        label(for="updated").col-sm-2.col-md-3.control-label Updated op
-                        div.col-sm-10.col-md-9
-                            input(value=ticket.updated, name='updated', readonly)#updated.form-control
-                    if (current.role == "Worker")
-                        div.form-group.pull-right
-                            div.col-xs-12
-                                button.btn.btn-primary: i.fa.fa-pencil
+                            label(for="id").col-sm-2.col-md-3.control-label #
+                            div.col-sm-10.col-md-9
+                                input(value=ticket.id, name='id', readonly)#id.form-control
+                        div.form-group
+                            label(for="client").col-sm-2.col-md-3.control-label Client
+                            div.col-sm-10.col-md-9
+                                input(value=ticket.client, name='client', readonly)#client.form-control
+                        div.form-group
+                            label(for="created").col-sm-2.col-md-3.control-label Gemaakt op
+                            div.col-sm-10.col-md-9
+                                input(value=ticket.created, name='created', readonly)#created.form-control
+                        div.form-group
+                            label(for="priority").col-sm-2.col-md-3.control-label Prioriteit
+                            div.col-sm-10.col-md-9
+                                select(name='priority')&attributes({'disabled': current.role != "Worker"})#priority.form-control
+                                    +options(options.priorities, ticket.priority)
+                        div.form-group
+                            label(for="status").col-sm-2.col-md-3.control-label Status
+                            div.col-sm-10.col-md-9
+                                select(name='status')&attributes({'disabled': current.role != "Worker"})#status.form-control
+                                    +options(options.statuses, ticket.status)
+                        div.form-group
+                            label(for="assigned").col-sm-2.col-md-3.control-label Toegewezen
+                            div.col-sm-10.col-md-9
+                                select(name='assigned')&attributes({'disabled': current.role != "Worker"})#assigned.form-control
+                                    option(selected, disabled, hidden, value='')
+                                    +options(options.workers, ticket.assigned)
+                        div.form-group
+                            label(for="updated").col-sm-2.col-md-3.control-label Updated op
+                            div.col-sm-10.col-md-9
+                                input(value=ticket.updated, name='updated', readonly)#updated.form-control
+                        if (current.role == "Worker")
+                            div.form-group.pull-right
+                                div.col-xs-12
+                                    button.btn.btn-primary: i.fa.fa-pencil
         div.row
             h2  Reageren
             div.col-sm-12
