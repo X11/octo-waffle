@@ -1,38 +1,50 @@
-//
-// body > header {
-//     display: block;
-//     text-align:center;
-//     padding: 20px;
-//     background: #ededed;
-//
-//     .logo {
-//         height: 100px;
-//     }
-//
-//     &.small {
-//         text-align:right;
-//
-//         .logo {
-//             height: 60px;
-//         }
-//     }
-// }
 
-.navbar-sugoi {
+.navbar {
+    padding: 20px 0;
+    margin: 0;
+}
+.navbar-default {
     background-color: rgba(248, 248, 248, 0);
     border-color: rgba(248, 248, 248, 0);
 
     .navbar-brand {
-        color: #333;
-        font-weight: 800;
+        color: #fff;
+        font-weight: 600;
         font-size: 2em;
+
+        &:hover {
+            color: #000;
+        }
     }
 
     .navbar-nav>li>a {
-        color: #333;
+        color: #fff;
 
         &:hover {
-            background-color: transparent;
+            color: #000;
+        }
+    }
+
+}
+
+header {
+    height: 90%;
+    background-color: #fe4444;
+    margin-bottom: 20px;
+
+    .container {
+        height: auto;
+        position: relative;
+        top: 10%;
+
+        h1 {
+            color: #fff;
+            font-size: 3em;
+            margin: 20% 0;
+        }
+        img {
+            width: 100%;
+            margin: 8% 0;
         }
     }
 }

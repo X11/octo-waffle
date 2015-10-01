@@ -95,7 +95,6 @@ router.get('/:id', function(req, res, next) {
                 .then(function(comments) {
                     data.comments = comments;
 
-                    // RETURN EMPTY ARRAY WHEN NO COMMENTS FOUND PLS
                     res.locals.ticket = data;
                     res.locals.ticket.id = req.params.id;
                     res.render('octo/ticket/ticket');

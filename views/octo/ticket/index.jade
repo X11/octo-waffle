@@ -6,7 +6,7 @@ block content
     div.col-xs-12
         div.btn-group
             a(href="/octo/tickets/create").btn.btn-success Nieuwe Ticket
-        div.panel.panel-custom
+        div.table-responsive
             table.table
                 thead
                     tr
@@ -34,7 +34,7 @@ block content
                         th
                 tbody
                     each ticket in tickets
-                        tr
+                        tr(class={closed: ticket.status == "Closed" || ticket.status == "Rejected"})
                             td= ticket.id
                             td: a( href="/octo/tickets/"+ticket.id) #{ticket.title}
                             td= ticket.client

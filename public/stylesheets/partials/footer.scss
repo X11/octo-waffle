@@ -1,43 +1,9 @@
-//
-// footer {
-//     position: absolute;
-//     width: 100%;
-//     bottom: 0;
-//     color: #aaa;
-//     background: #1f1f1f;
-//     border-top: #3a3a3a;
-//     padding-top: 15px;
-//     height: 130px;
-//     p {
-//         font-size: 80%;
-//     }
-//
-//     a {
-//         color: #fff !important;
-//
-//         &:hover {
-//             color: #f44 !important;
-//         }
-//     }
-// }
-//
 
 footer {
     padding: 40px;
     background-color: #eee;
     font-size: 14px;
-    ul {
-        padding: 0;
-        li {
-            list-style: none;
-            float: left;
-            margin: 0 10px 0 10px;
 
-            &:first-child {
-                margin: 0 10px 0 0;
-            }
-        }
-    }
     p {
         margin-top: 20px;
     }

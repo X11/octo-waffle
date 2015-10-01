@@ -25,7 +25,11 @@ body {
 body {
     font: 18px/1.6 "Roboto", sans-serif;
     font-weight: 300;
-    background-color: #fff;
+    background-color: #f8f8f8;
     box-sizing: border-box;
     min-height: 100%;
+}
+
+table {
+    background: inherit;
 }
