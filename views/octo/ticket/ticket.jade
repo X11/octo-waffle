@@ -12,7 +12,7 @@ block content
         div.row
             div.col-sm-12
                 a(href="/octo/tickets") Back
-                if (current.role == "Worker" || (current.role == "Client" && current.status == "Open"))
+                if (current.role == "Worker" || (current.role == "Client" && ticket.status == "Open"))
                     div.pull-right
                         button(onclick="return window.confirm('weet je dit zeker?');", form="DELETE_TICKET").btn.btn-danger: i.fa.fa-trash
                 h2 #{ticket.title}

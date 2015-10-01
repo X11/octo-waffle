@@ -6,7 +6,7 @@ var db = require('Octagon');
 
 // Get all tickets
 router.get('/', function(req, res, next) {
-    var sortBy = (req.query.field) ? req.query.field : "created";
+    var sortBy = (req.query.field) ? req.query.field : "id";
     var order = (req.query.order) ? req.query.order.toLowerCase() : "desc";
     db
         .ticket
@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
                 .then(function(data) {
                     if (req.session.current.role == 'Client')
                         data = data.filter(function(ticket) {
-                            return ticket.client == req.session.current.id;
+                            return ticket.cid == req.session.current.id;
                         });
 
                     res.locals.tickets = data.sort(function(a, b) {
@@ -83,7 +83,7 @@ router.get('/:id', function(req, res, next) {
                 return next(new Error("Ticket not found."));
             }
 
-            if (data.client !== req.session.current.id &&
+            if (data.cid !== req.session.current.id &&
                 req.session.current.role !== "Worker") {
                 res.status(403);
                 return next(new Error("Ticket not visible for you."));
@@ -142,7 +142,7 @@ router.delete('/:id', function(req, res, next) {
                 res.status(404);
                 return next(new Error("Ticket not found."));
             }
-            if (data.client !== req.session.current.id &&
+            if (data.cid !== req.session.current.id &&
                 req.session.current.role !== "Worker") {
                 res.status(403);
                 return next(new Error("Ticket not visible for you."));
