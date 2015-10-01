@@ -1,19 +1,38 @@
+//
+// body > header {
+//     display: block;
+//     text-align:center;
+//     padding: 20px;
+//     background: #ededed;
+//
+//     .logo {
+//         height: 100px;
+//     }
+//
+//     &.small {
+//         text-align:right;
+//
+//         .logo {
+//             height: 60px;
+//         }
+//     }
+// }
 
-body > header {
-    display: block;
-    text-align:center;
-    padding: 20px;
-    background: #ededed;
+.navbar-sugoi {
+    background-color: rgba(248, 248, 248, 0);
+    border-color: rgba(248, 248, 248, 0);
 
-    .logo {
-        height: 100px;
+    .navbar-brand {
+        color: #333;
+        font-weight: 800;
+        font-size: 2em;
     }
 
-    &.small {
-        text-align:right;
+    .navbar-nav>li>a {
+        color: #333;
 
-        .logo {
-            height: 60px;
+        &:hover {
+            background-color: transparent;
         }
     }
 }
