@@ -41,9 +41,8 @@ block content
                         td= ticket.assigned
                         td: span(class="label label-"+options.priority[ticket.priority])= ticket.priority
                         td: span(class="label label-"+options.status[ticket.status])= ticket.status
-                        td
-                            if (current.role == "Worker" || (current.role == "Client" && ticket.status == "Open"))
+                        if (current.role == "Worker" || (current.role == "Client" && ticket.status == "Open"))
+                            td
                                 button(onclick="return window.confirm('weet je dit zeker?');", form="FORM_DELETE", formaction="/octo/tickets/"+ticket.id).btn.btn-danger.btn-xs: i.fa.fa-trash
-                            a(href="/octo/tickets/"+ticket.id).btn.btn-primary.btn-xs: i.fa.fa-angle-right
         if (tickets == 0)
             p.alert.alert-warning Geen tickets om weer te geven.
