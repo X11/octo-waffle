@@ -90,7 +90,7 @@ router.get('/:id', function(req, res, next) {
             }
 
             var failsafe = setInterval(function() {
-                req.flash("error", "Fail safe for comments");
+                res.locals.error = "Fail safe for comments";
                 res.render('octo/ticket/ticket');
             }, 1000);
 
