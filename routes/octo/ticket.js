@@ -89,14 +89,20 @@ router.get('/:id', function(req, res, next) {
                 return next(new Error("Ticket not visible for you."));
             }
 
+            var failsafe = setInterval(function() {
+                req.flash("error", "Fail safe for comments");
+                res.render('octo/ticket/ticket');
+            }, 1000);
+
+            res.locals.ticket = data;
+            res.locals.ticket.id = req.params.id;
+
             // get comments
             db.comment
                 .from(req.params.id)
                 .then(function(comments) {
-                    data.comments = comments;
-
-                    res.locals.ticket = data;
-                    res.locals.ticket.id = req.params.id;
+                    res.locals.ticket.comments = comments;
+                    clearInterval(failsafe);
                     res.render('octo/ticket/ticket');
                 }).catch(function(err) {
                     req.flash("error", err.message);
