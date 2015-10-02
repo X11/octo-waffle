@@ -38,7 +38,7 @@ html
                 br
                 |  Geen probleem.
             .col-sm-4.col-lg-4
-              img(src='/images/steven_de_brandweerman.png', alt='Steven de brandweerman')
+              img(src='/images/steven_de_brandweerman.png', alt='Steven de brandweerman')#bws
 
 
 
@@ -90,3 +90,10 @@ html
 
         script(src="https://code.jquery.com/jquery-1.11.3.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+        script(type="text/javascript").
+            var s = null;
+            document.getElementById("bws").onclick = function(){
+                if (s) return s.play();
+                s = new Audio('/sounds/brandweermansam.mp3')
+                s.autoplay = true;
+            }
