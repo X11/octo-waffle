@@ -14,22 +14,18 @@ html
     body
         include ./../partial/header
         div.container
-            div.row
-                div.col-xs-12
-                    div.alert.alert-info Vuurvechters ticketing systeem is momenteel in <b>beta</b>.
-                    if (success)
-                        div.alert.alert-success.alert.dismissible
-                            button(type="button", data-dismiss="alert").close: span &times;
-                            | #{success}
-                    if (error)
-                        div.alert.alert-danger #{error}
+            div.alert.alert-info Vuurvechters ticketing systeem is momenteel in <b>beta v1.0.1</b>.
+            if (success)
+                div.alert.alert-success.alert.dismissible
+                    button(type="button", data-dismiss="alert").close: span &times;
+                    | #{success}
+            if (error)
+                div.alert.alert-danger #{error}
             if (current)
-                div.row
-                    div.col-xs-12
-                        +octonav(links, active)
+                +octonav(links, active)
             div.view-fix
-            div.row
-                block content
+        div.container
+            block content
         include ./../partial/footer
         script(src="https://code.jquery.com/jquery-1.11.3.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
