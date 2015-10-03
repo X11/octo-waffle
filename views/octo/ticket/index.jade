@@ -33,7 +33,7 @@ block content
                     th
             tbody
                 each ticket in tickets
-                    tr(class={closed: ticket.status == "Closed" || ticket.status == "Rejected"})
+                    tr(class={closed: ticket.status == "Closed", [options.status[ticket.status]]: true})
                         td= ticket.id
                         td: a( href="/octo/tickets/"+ticket.id) #{ticket.title}
                         td= ticket.client
