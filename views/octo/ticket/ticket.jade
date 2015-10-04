@@ -21,7 +21,7 @@ block content
                         | &nbsp;
                         span(class="label label-"+options.status[ticket.status])= ticket.status
                     div.form-group
-                        pre(readonly, style="min-height:200px;resize:vertical;").form-control #{ticket.description}
+                        textarea(readonly, style="min-height:200px;resize:vertical;").form-control #{ticket.description}
                     if ticket.comments
                         each comment in ticket.comments
                             div
@@ -29,7 +29,7 @@ block content
                                 h4 #{comment.client}
                                     if (current.role == "Worker")
                                         button(onclick="return window.confirm('weet je dit zeker?');", form="FORM_DELETE", formaction="/octo/tickets/"+ticket.id+"/comment/delete/"+comment.id).btn.btn-danger.btn-xs.pull-right: i.fa.fa-trash
-                                pre(readonly, style="resize:vertical;").form-control #{comment.content}
+                                textarea(readonly, style="resize:vertical;").form-control #{comment.content}
                     h2  Reageren
                     form(method="POST",action="/octo/tickets/"+ticket.id+"/comment/create")
                         input(type="hidden", value=current.name, name='client')
