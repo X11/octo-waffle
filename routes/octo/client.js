@@ -6,16 +6,14 @@ var db = require("Octagon");
 
 // Get all users
 router.get('/', function(req, res, next) {
-    db
-        .client
+    db.client
         .all()
         .then(function(ids) {
             var promises = [];
             ids.forEach(function(id) {
                 promises.push(db.client.get(id));
             });
-            Q
-                .all(promises)
+            Q.all(promises)
                 .then(function(data) {
                     res.locals.clients = data;
                     res.render('octo/client/index');

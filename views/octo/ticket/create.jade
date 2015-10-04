@@ -3,38 +3,37 @@ extends ../../layout/octo
 include ../../partial/mixin/options
 
 block content
-    div.panel.panel-custom
-        form(method="POST",action="/octo/tickets/create").form-horizontal
-            input(type="hidden", value=current.name, name='client')
-            div.row
-                div.col-sm-12
-                    div.col-md-5
-                        h2 Nieuwe ticket
-                        p Om optimaal gebruik te maken van dit ticket systeem vragen wij u om van de volgende richtlijnen gebruik te maken.
-                            ul
-                                li Beschrijving van het probleem
-                                li Al geprobeerde oplossingen
-                            | Indien u verder nog overige informatie heeft kunt u deze erin zetten.
-                    div.col-md-7
-                        div.form-group
-                            div.col-xs-12
-                                label(for="title") Titel
-                                input(name='title', required)#title.form-control
-                        div.form-group
-                            div.col-xs-12
-                                label(for="title") Categorie
-                                select(name='category', required)#categori.form-control
-                                    option(selected, disabled, hidden, value='')
-                                    +options(["Advies", "Ondersteuning"])
-                        div.form-group
-                            div.col-xs-12
-                                label(for="title") Beschrijving
-                                textarea(name="description", rows="10", style="resize:vertical;", required).form-control
-                        div.form-group
-                            div.col-xs-12
-                                label(for="priority") Priority
-                                select(name='priority', required)#priority.form-control
-                                    +options(options.priorities, "Low")
-                        div.form-group.pull-right
-                            div.col-xs-12
-                                button.btn.btn-primary Create
+    form(method="POST",action="/octo/tickets/create").form-horizontal
+        input(type="hidden", value=current.name, name='client')
+        div.row
+            div.col-sm-12
+                div.col-md-5
+                    h2 Nieuwe ticket
+                    p Om optimaal gebruik te maken van dit ticket systeem vragen wij u om van de volgende richtlijnen gebruik te maken.
+                        ul
+                            li Beschrijving van het probleem
+                            li Al geprobeerde oplossingen
+                        | Indien u verder nog overige informatie heeft kunt u deze erin zetten.
+                div.col-md-7
+                    div.form-group
+                        div.col-xs-12
+                            label(for="title") Titel
+                            input(name='title', required)#title.form-control
+                    div.form-group
+                        div.col-xs-12
+                            label(for="title") Categorie
+                            select(name='category', required)#categori.form-control
+                                option(selected, disabled, hidden, value='')
+                                +options(["Advies", "Ondersteuning"])
+                    div.form-group
+                        div.col-xs-12
+                            label(for="title") Beschrijving
+                            textarea(name="description", rows="10", style="resize:vertical;", required).form-control
+                    div.form-group
+                        div.col-xs-12
+                            label(for="priority") Priority
+                            select(name='priority', required)#priority.form-control
+                                +options(options.priorities, "Low")
+                    div.form-group.pull-right
+                        div.col-xs-12
+                            button.btn.btn-primary Create

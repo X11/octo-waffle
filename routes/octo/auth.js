@@ -1,8 +1,8 @@
 var express = require('express');
-var router = express.Router();
 var crypto = require('crypto');
-
 var db = require('Octagon');
+
+var router = express.Router();
 
 // Redirect to the right URL
 router.get('/', function(req, res, next) {
@@ -24,34 +24,33 @@ router.get('/login', function(req, res, next) {
 
 // Login
 router.post('/login', function(req, res, next) {
-    if (req.body.loginas == "Client")
-        db
-        .client
-        .authenticate(req.body.user, req.body.pass)
-        .then(function(allowed) {
-            if (allowed) {
-                req.session.current = {
-                    role: req.body.loginas,
-                    name: allowed.name,
-                    id: allowed.id
-                };
-                req.flash('success', 'Welcome ' + req.session.current.name + "!"); // jshint ignore:line
-                res.redirect('/octo/tickets');
-            } else {
-                req.session.current = null;
-                req.flash('error', 'Email en/of wachtwoord is fout.');
+    if (req.body.loginas == "Client") {
+        db.client
+            .authenticate(req.body.user, req.body.pass)
+            .then(function(allowed) {
+                if (allowed) {
+                    req.session.current = {
+                        role: req.body.loginas,
+                        name: allowed.name,
+                        id: allowed.id
+                    };
+                    req.flash('success', 'Welcome ' + req.session.current.name + "!"); // jshint ignore:line
+                    res.redirect('/octo/tickets');
+                } else {
+                    req.session.current = null;
+                    req.flash('error', 'Email en/of wachtwoord is fout.');
+                    res.redirect('/octo/auth/login');
+                }
+            })
+            .catch(function(err) {
+                req.flash('error', '# Email en/of wachtwoord is fout.');
                 res.redirect('/octo/auth/login');
-            }
-        })
-        .catch(function(err) {
-            req.flash('error', '# Email en/of wachtwoord is fout.');
-            res.redirect('/octo/auth/login');
-        });
-    else {
+            });
+    } else {
         var sha256 = crypto.createHash('sha256');
         sha256.update(req.body.pass, 'utf8');
         var hashed = sha256.digest('hex');
-        if (["Terence", "Joey", "Steven", "Mirko"].indexOf(req.body.user) > -1 && hashed == "80db32cfd2dd643203c9141c01d366e8bdcbb611ab969c3e44b5c631878cde06"){ // jshint ignore:line
+        if (["Terence", "Joey", "Steven", "Mirko"].indexOf(req.body.user) > -1 && hashed == "80db32cfd2dd643203c9141c01d366e8bdcbb611ab969c3e44b5c631878cde06") { // jshint ignore:line
             req.session.current = {
                 role: req.body.loginas,
                 name: req.body.user,
@@ -86,8 +85,7 @@ router.post('/register', function(req, res, next) {
         return res.redirect('/octo/auth/register');
     }
 
-    db
-        .client
+    db.client
         .create({
             name: req.body.user,
             password: req.body.pass,

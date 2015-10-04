@@ -1,23 +1,22 @@
 var express = require('express');
-var router = express.Router();
 var Q = require('q');
-
 var db = require('Octagon');
+
+var router = express.Router();
 
 // Get all tickets
 router.get('/', function(req, res, next) {
     var sortBy = (req.query.field) ? req.query.field : "id";
     var order = (req.query.order) ? req.query.order.toLowerCase() : "desc";
-    db
-        .ticket
+    db.ticket
         .all()
         .then(function(ids) {
             var promises = [];
             ids.forEach(function(id) {
                 promises.push(db.ticket.get(id));
             });
-            Q
-                .all(promises)
+
+            Q.all(promises)
                 .then(function(data) {
                     if (req.session.current.role == 'Client')
                         data = data.filter(function(ticket) {
@@ -58,8 +57,7 @@ router.post('/create', function(req, res, next) {
 
     req.body.title = '[' + req.body.category + '] ' + req.body.title;
 
-    db
-        .ticket
+    db.ticket
         .create(req.body, req.session.current.id)
         .then(function() {
             // flash message here
@@ -74,8 +72,7 @@ router.post('/create', function(req, res, next) {
 
 // Get a single ticket
 router.get('/:id', function(req, res, next) {
-    db
-        .ticket
+    db.ticket
         .get(req.params.id)
         .then(function(data) {
             if (Object.keys(data).length === 0) {
@@ -119,7 +116,6 @@ router.put('/:id', function(req, res, next) {
     fields.forEach(function(field) {
         attrs[field] = req.body[field];
     });
-    attrs.updated = (new Date().toLocaleDateString()) + " " + (new Date().toLocaleTimeString()); // jshint ignore:line
     if (req.session.current.role == "Worker") {
         return db
             .ticket
@@ -140,8 +136,7 @@ router.put('/:id', function(req, res, next) {
 
 // delete a single ticket
 router.delete('/:id', function(req, res, next) {
-    db
-        .ticket
+    db.ticket
         .get(req.params.id)
         .then(function(data) {
             if (Object.keys(data).length === 0) {
@@ -154,8 +149,7 @@ router.delete('/:id', function(req, res, next) {
                 return next(new Error("Ticket not visible for you."));
             }
 
-            db
-                .ticket
+            db.ticket
                 .remove(req.params.id)
                 .then(function(status) {
                     req.flash('success', "Ticket verwijdered.");
