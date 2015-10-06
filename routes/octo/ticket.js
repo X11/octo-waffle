@@ -20,8 +20,13 @@ router.get('/', function(req, res, next) {
                 .then(function(data) {
                     if (req.session.current.role == 'Client')
                         data = data.filter(function(ticket) {
-                            return parseInt(ticket.cid) == parseInt(req.session.current.id);
+                            return ticket.cid == req.session.current.id;
                         });
+
+                    data.map(function(d) {
+                        d.id = parseInt(d.id);
+                        return d;
+                    });
 
                     res.locals.tickets = data.sort(function(a, b) {
                         return a[sortBy] > b[sortBy];
