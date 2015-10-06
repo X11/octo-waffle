@@ -11,5 +11,5 @@
     "unused": false,
     "trailing": true,
     "sub": true,
-    "predef": ["document"]
+    "predef": ["document", "window"]
 }
