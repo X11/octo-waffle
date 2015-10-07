@@ -92,8 +92,9 @@ html
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
         script(type="text/javascript").
             var s = null;
+            var r = ["/sounds/brandweersam.mp3", "/sounds/brandweerlied.mp3"][Math.floor(Math.random()*2)];
             document.getElementById("bws").onclick = function(){
                 if (s) return s.play();
-                s = new Audio('/sounds/brandweermansam.mp3')
+                s = new Audio(r);
                 s.autoplay = true;
             }
